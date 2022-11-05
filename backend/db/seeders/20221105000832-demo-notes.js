@@ -6,6 +6,7 @@ module.exports = {
       "Notes",
       [
         {
+          userId: 1,
           title: "First Project",
           color: "00ffff",
           pinned: true,
@@ -14,6 +15,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: 1,
           title: "Second Project",
           pinned: false,
           archived: false,
@@ -21,6 +23,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: 1,
           title: "Third Project",
           color: "faebd7",
           pinned: false,
@@ -29,6 +32,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: 1,
           title: "Fourth Project",
           color: "7fff00",
           pinned: false,
@@ -37,6 +41,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: 1,
           title: "Pinned Project",
           color: "7fffd4",
           pinned: true,
@@ -45,6 +50,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: 1,
           title: "Trash",
           color: "a9a9a9",
           pinned: false,
@@ -53,9 +59,18 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          userId: 1,
           title: "Archived",
           pinned: false,
           archived: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          userId: 2,
+          title: "user 2 note",
+          pinned: false,
+          archived: false,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
