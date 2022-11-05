@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNotes } from "../../store/notes";
 import ChecklistItems from "./checklistItems";
+import NoteEditModal from "../NoteEdit";
 
 export default function Notes() {
   const dispatch = useDispatch();
@@ -19,9 +20,10 @@ export default function Notes() {
       <h1>All Notes!</h1>
       <div>
         {notesArray?.map((note) => (
-          <div key={note?.id}>
+          <div className="note" key={note?.id} style={{backgroundColor:`#${note?.color}`}}>
             <h3>{note?.title}</h3>
             <ChecklistItems note={note}  />
+            <NoteEditModal />
           </div>
         ))}
       </div>
