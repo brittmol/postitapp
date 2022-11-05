@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/Auth/LoginFormPage";
 import SignupFormPage from "./components/Auth/SignupFormPage";
 import Navigation from "./components/Navigation";
+import Notes from "./components/Notes";
 import NoteEditModal from "./components/NoteEdit";
 import * as sessionActions from "./store/session";
 
@@ -20,6 +21,7 @@ export default function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
+            <Notes />
             <NoteEditModal />
           </Route>
           <Route path="/login">
