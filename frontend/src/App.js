@@ -5,6 +5,7 @@ import LoginFormPage from "./components/Auth/LoginFormPage";
 import SignupFormPage from "./components/Auth/SignupFormPage";
 import Navigation from "./components/Navigation";
 import Notes from "./components/Notes";
+import ProtectedRoute from "./components/ProtectedRoute";
 // import NoteEditModal from "./components/NoteEdit";
 import * as sessionActions from "./store/session";
 
@@ -20,14 +21,14 @@ export default function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
+          <ProtectedRoute exact path="/">
             <Notes />
             {/* <NoteEditModal /> */}
-          </Route>
-          <Route path="/login">
+          </ProtectedRoute>
+          <Route exact path="/login">
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
         </Switch>
