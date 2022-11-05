@@ -22,4 +22,75 @@ router.get(
   })
 );
 
+router.post(
+  "/",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const note = await Note.create(req.body);
+    const newNote = await Note.findByPk(note.id, {
+      include: [{ model: ChecklistItem }],
+    });
+    return res.json(newNote);
+  })
+);
+
+router.post(
+  "/:noteId/checklistItems",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const noteId = req.params.id;
+    const item = await ChecklistItem.create(req.body);
+    const newItem = await ChecklistItem.findByPk(item.id);
+    return res.json(newItem);
+  })
+);
+
+router.put(
+  "/:noteId",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const noteId = req.params.id;
+    const note = await Note.findByPk(noteId);
+    const updatedNote = await note.update(req.body);
+    const newNote = await Note.findByPk(updatedNote.id);
+    return res.json(newNote);
+  })
+);
+
+router.put(
+  "/:noteId/checklistItems/:itemId",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { noteId, itemId } = req.params;
+    const item = await ChecklistItem.findByPk(itemId);
+    const updatedItem = await item.update(req.body);
+    const newItem = await ChecklistItem.findByPk(updatedItem.id);
+    return res.json(newItem);
+  })
+);
+
+router.delete(
+  "/:noteId",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const noteId = req.params.id;
+    const note = await Note.findByPk(noteId);
+    if (!note) throw new Error("Cannot find Note");
+    await note.destroy();
+    return res.json(note);
+  })
+);
+
+router.delete(
+  "/:noteId/checklistItems/:itemId",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { noteId, itemId } = req.params;
+    const item = await ChecklistItem.findByPk(itemId);
+    if (!item) throw new Error("Cannot find Checklist Item");
+    await item.destroy();
+    return res.json(item);
+  })
+);
+
 module.exports = router;
