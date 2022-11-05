@@ -23,7 +23,7 @@ export default function Notes() {
           <div className="note" key={note?.id} style={{backgroundColor:`#${note?.color}`}}>
             <h3>{note?.title}</h3>
             <ChecklistItems note={note}  />
-            <NoteEditModal />
+            <NoteEditModal note={note} />
           </div>
         ))}
       </div>

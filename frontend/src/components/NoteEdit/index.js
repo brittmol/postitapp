@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Modal } from '../../context/Modal'
 import NoteEditForm from './NoteEditForm'
 
-export default function NoteEditModal() {
+export default function NoteEditModal({note}) {
     const [showModal, setShowModal] = useState(false)
 
     return (
@@ -10,7 +10,7 @@ export default function NoteEditModal() {
             <button onClick={() => setShowModal(true)}>Edit Note</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <NoteEditForm />
+                    <NoteEditForm note={note} />
                 </Modal>
             )}
         </>
