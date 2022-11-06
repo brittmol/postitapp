@@ -43,22 +43,24 @@ export default function NoteEditForm({ note, onClose }) {
   };
 
   return (
-    <form
-      id="note-modal"
-      onSubmit={handleSubmit}
-      style={{ backgroundColor: `#${color}` }}
-    >
-      <h3>{title}</h3>
-      <input
-        type="text"
-        placeholder={title}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        // onKeyDown={onKeyDown}
-      />
-      <ChecklistItems note={note} />
-      <button type="submit">Close</button>
+    <>
+      <form
+        id="note-modal"
+        onSubmit={handleSubmit}
+        style={{ backgroundColor: `#${color}` }}
+      >
+        <h3>{title}</h3>
+        <input
+          type="text"
+          placeholder={title}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          // onKeyDown={onKeyDown}
+        />
+        <ChecklistItems note={note} />
+        <button type="submit">Close</button>
+      </form>
       <button onClick={() => dispatch(removeNote(note))}>Delete Note</button>
-    </form>
+    </>
   );
 }
