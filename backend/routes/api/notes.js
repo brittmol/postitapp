@@ -38,7 +38,7 @@ router.post(
   "/:noteId/checklistItems",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const noteId = req.params.id;
+    const { noteId } = req.params;
     const item = await ChecklistItem.create(req.body);
     const newItem = await ChecklistItem.findByPk(item.id);
     return res.json(newItem);
@@ -49,10 +49,12 @@ router.put(
   "/:noteId",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const noteId = req.params.id;
+    const { noteId } = req.params;
     const note = await Note.findByPk(noteId);
     const updatedNote = await note.update(req.body);
-    const newNote = await Note.findByPk(updatedNote.id);
+    const newNote = await Note.findByPk(updatedNote.id, {
+      include: [{ model: ChecklistItem }],
+    });
     return res.json(newNote);
   })
 );
@@ -73,7 +75,7 @@ router.delete(
   "/:noteId",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const noteId = req.params.id;
+    const { noteId } = req.params;
     const note = await Note.findByPk(noteId);
     if (!note) throw new Error("Cannot find Note");
     await note.destroy();

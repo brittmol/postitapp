@@ -43,25 +43,53 @@ export const getNotes = () => async (dispatch) => {
   }
 };
 
-export const createNote = (payload) => async (dispatch) => {
+export const createNote = (data) => async (dispatch) => {
   const response = await csrfFetch("/api/notes", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(data)
   })
 
   if (response.ok) {
-    const data = await response.json()
-    dispatch(addNote(data))
-    return data
+    const note = await response.json()
+    dispatch(addNote(note))
+    return note
   } else if (response.status < 500) {
-    const data = await response.json()
-    if (data.errors) return data.errors
+    const note = await response.json()
+    if (note.errors) return note.errors
   } else {
     return ["An error occurred. Please try to create a new note again."]
   }
 }
 
+export const updateNote = (data) => async (dispatch) => {
+  const response = await csrfFetch(`/api/notes/${data.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  })
+
+  if (response.ok) {
+    const note = await response.json()
+    dispatch(addNote(note))
+    return note
+  } else if (response.status < 500) {
+    const note = await response.json()
+    if (note.errors) return note.errors
+  } else {
+    return ["An error occurred. Please try to create a new note again."]
+  }
+}
+
+export const removeNote = (data) => async (dispatch) => {
+  const response = await csrfFetch(`/api/notes/${data.id}`, {
+    method: "DELETE"
+  })
+  if (response.ok) {
+    const note = await response.json()
+    dispatch(deleteNote(note))
+  }
+}
 
 // ----------------- REDUCER ----------------------------------
 

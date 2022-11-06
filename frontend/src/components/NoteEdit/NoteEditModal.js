@@ -6,6 +6,10 @@ import ChecklistItems from "../Notes/checklistItems";
 export default function NoteEditModal({ note }) {
   const [showModal, setShowModal] = useState(false);
 
+  const onCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <div
@@ -18,7 +22,7 @@ export default function NoteEditModal({ note }) {
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <NoteEditForm note={note} />
+          <NoteEditForm note={note} onClose={onCloseModal} />
         </Modal>
       )}
     </>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNotes } from "../../store/notes";
-import NoteEditModal from "../NoteEdit";
+import NoteEditModal from "../NoteEdit/NoteEditModal";
 
 export default function Notes() {
   const dispatch = useDispatch();
