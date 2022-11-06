@@ -50,27 +50,27 @@ export default function NoteCreateForm() {
     <>
       {inCreateMode ? (
         // <div onBlur={() => setInCreateMode(false)}>
-        <form
-          onSubmit={handleSubmit}
-          style={{ backgroundColor: "pink", padding: "10px" }}
-        >
-          <div>
-            <input
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-            <input placeholder="checklist" />
-            <h3>stufffff</h3>
-            <button onClick={() => onCancel()}>Cancel</button>
-            <button type="submit">Create</button>
-          </div>
-        </form>
+        <div style={{ backgroundColor: "pink", padding: "10px" }}>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <input placeholder="checklist" />
+              <button type="submit">Create</button>
+            </div>
+          </form>
+          <button onClick={() => onCancel()}>Cancel</button>
+        </div>
       ) : (
-        <input
-          placeholder="Take a note..."
-          onFocus={() => setInCreateMode(true)}
-        />
+        <div style={{ backgroundColor: "pink", padding: "10px" }}>
+          <input
+            placeholder="Take a note..."
+            onFocus={() => setInCreateMode(true)}
+          />
+        </div>
       )}
     </>
   );
