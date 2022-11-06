@@ -33,12 +33,12 @@ export default function NoteEditForm({ note, onClose }) {
       archived,
     };
 
-    const updatedNote = dispatch(updateNote(noteData))
+    const updatedNote = dispatch(updateNote(noteData));
     if (updatedNote) {
       onClose();
     } else {
-        setErrors(updatedNote)
-        onClose()
+      setErrors(updatedNote);
+      onClose();
     }
   };
 
@@ -58,6 +58,7 @@ export default function NoteEditForm({ note, onClose }) {
       />
       <ChecklistItems note={note} />
       <button type="submit">Close</button>
+      <button onClick={() => dispatch(removeNote(note))}>Delete Note</button>
     </form>
   );
 }
