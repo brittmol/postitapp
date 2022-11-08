@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import ChecklistItems from "../Notes/checklistItems";
 import Features from "../Features/Features";
-import { updateNote, removeNote } from "../../store/notes";
+import { updateNote } from "../../store/notes";
 
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
@@ -33,6 +33,10 @@ export default function NoteEditForm({ note, onClose }) {
 
   return (
     <div id="note-modal" style={{ backgroundColor: note?.color }}>
+      <div>
+        <button onClick={() => onSave()}>Save</button>
+        <button onClick={() => onClose()}>Cancel</button>
+      </div>
       <input
         type="text"
         placeholder={title}
@@ -41,9 +45,6 @@ export default function NoteEditForm({ note, onClose }) {
         // onKeyDown={onKeyDown}
       />
       <ChecklistItems note={note} />
-      <button onClick={() => onSave()}>Save</button>
-      <button onClick={() => onClose()}>Cancel</button>
-      <button onClick={() => dispatch(removeNote(note))}>Delete Note</button>
       <Features note={note} />
     </div>
   );

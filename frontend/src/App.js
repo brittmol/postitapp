@@ -4,9 +4,11 @@ import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/Auth/LoginFormPage";
 import SignupFormPage from "./components/Auth/SignupFormPage";
 import Navigation from "./components/Navigation";
-import AllNotes from "./components/Notes/AllNotes";
+import NotesPage from "./components/Notes/NotesPage";
+import ArchivePage from "./components/Notes/ArchivePage"
 import ProtectedRoute from "./components/ProtectedRoute";
 import * as sessionActions from "./store/session";
+import SideBar from "./components/Navigation/SideBar";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -20,8 +22,13 @@ export default function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <ProtectedRoute exact path="/">
-            <AllNotes />
+          <ProtectedRoute exact path="/notes">
+            <SideBar />
+            <NotesPage />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/archive">
+            <SideBar />
+            <ArchivePage />
           </ProtectedRoute>
           <Route exact path="/login">
             <LoginFormPage />

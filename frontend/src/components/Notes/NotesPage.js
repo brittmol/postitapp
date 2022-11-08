@@ -4,14 +4,13 @@ import { getNotes } from "../../store/notes";
 import NoteCreateForm from "../NoteCreate";
 import SingleNote from "./SingleNote";
 
-export default function AllNotes() {
+export default function NotesPage() {
   const dispatch = useDispatch();
 
   const notes = useSelector((state) => state.notesReducer);
   const notesArray = Object.values(notes);
 
   const pinnedNotes = notesArray.filter((note) => note.pinned === true);
-  const archivedNotes = notesArray.filter((note) => note.archived === true);
   const otherNotes = notesArray.filter(
     (note) => note.pinned === false && note.archived === false
   );
@@ -22,7 +21,7 @@ export default function AllNotes() {
 
   return (
     <>
-      <h1>All Notes!</h1>
+      <h1>Notes!</h1>
       <NoteCreateForm />
       <div>
         {pinnedNotes.length ? (
@@ -47,13 +46,6 @@ export default function AllNotes() {
             ))}
           </div>
         )}
-
-        <div>
-          <h3>Archived Notes</h3>
-          {archivedNotes?.map((note) => (
-            <SingleNote key={note?.id} note={note} />
-          ))}
-        </div>
       </div>
     </>
   );
