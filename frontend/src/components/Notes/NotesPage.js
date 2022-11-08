@@ -4,6 +4,7 @@ import { getNotes } from "../../store/notes";
 import NoteCreateForm from "../NoteCreate";
 import SingleNote from "./SingleNote";
 import PinnedAndArchived from "../Features/PinnedAndArchived";
+import NotesList from "./NotesLists";
 
 export default function NotesPage() {
   const dispatch = useDispatch();
@@ -26,31 +27,7 @@ export default function NotesPage() {
     <>
       <h1>Notes!</h1>
       <NoteCreateForm />
-      <div>
-        <h3>Pinned</h3>
-        {pinnedNotes?.map((note) => (
-          <ul key={note?.id}>
-            <li key={note?.id}>{note?.title}</li>
-            <PinnedAndArchived note={note} />
-          </ul>
-        ))}
-        <h3>Archived</h3>
-        {archivedNotes?.map((note) => (
-          <ul key={note?.id}>
-            <li key={note?.id}>{note?.title}</li>
-            <PinnedAndArchived note={note} />
-          </ul>
-        ))}
-        <h3>Other</h3>
-        {otherNotes?.map((note) => (
-          <ul key={note?.id}>
-            <li key={note?.id}>{note?.title}</li>
-            <PinnedAndArchived note={note} />
-          </ul>
-        ))}
-        <p>--------------------------------------------------------------</p>
-      </div>
-
+      {/* <NotesList notesArray={notesArray} /> */}
       <div>
         {pinnedNotes.length ? (
           <div>

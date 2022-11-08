@@ -16,13 +16,16 @@ export default function ArchivePage() {
 
   return (
     <>
-      <h1>Archived</h1>
-      <div>
-        <h3>Archived Notes</h3>
-        {archivedNotes?.map((note) => (
-          <SingleNote key={note?.id} note={note} />
-        ))}
-      </div>
+      {archivedNotes.length ? (
+        <div>
+          <h3>Archived Notes</h3>
+          {archivedNotes?.map((note) => (
+            <SingleNote key={note?.id} note={note} />
+          ))}
+        </div>
+      ) : (
+        <h1>Nothing Archived</h1>
+      )}
     </>
   );
 }
