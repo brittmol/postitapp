@@ -3,6 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { createItem, removeItem } from "../../store/checklist";
 
 export default function AddToChecklist({ note }) {
+
+    /*
+    - create as many checkbox input boxes as you want
+    - on Save:
+        -- dispatch new note w/ Title
+        -- delete other items associated with note
+        -- loop thru new inputList
+            dispatch a new checklistitem
+            for each item on the list
+
+
+    */
+
   const dispatch = useDispatch();
 
   const [item, setItem] = useState("");
