@@ -14,23 +14,12 @@ const addNote = (note) => ({
   note,
 });
 
-const ADD_ITEM = "notes/items/addItem";
-const addItem = (item) => ({
-  type: ADD_ITEM,
-  item,
-});
-
 const DELETE_NOTE = "notes/deleteNote";
 const deleteNote = (note) => ({
   type: DELETE_NOTE,
   note,
 });
 
-const DELETE_ITEM = "notes/items/deleteItem";
-const deleteItem = (item) => ({
-  type: DELETE_ITEM,
-  item,
-});
 
 // ----------------- THUNKS ----------------------------------
 
