@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/Auth/LoginFormPage";
 import SignupFormPage from "./components/Auth/SignupFormPage";
 import Navigation from "./components/Navigation";
-import Notes from "./components/Notes";
+import AllNotes from "./components/Notes/AllNotes";
 import ProtectedRoute from "./components/ProtectedRoute";
 import * as sessionActions from "./store/session";
 
@@ -21,7 +21,7 @@ export default function App() {
       {isLoaded && (
         <Switch>
           <ProtectedRoute exact path="/">
-            <Notes />
+            <AllNotes />
           </ProtectedRoute>
           <Route exact path="/login">
             <LoginFormPage />
