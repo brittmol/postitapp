@@ -19,7 +19,7 @@ export default function SingleNote({ note }) {
         // onClick={() => setShowModal(true)}
       >
         <button onClick={() => setShowModal(true)}>Edit</button>
-        <h3>{note?.title}</h3>
+        <h3>{note?.title ? note?.title : "***Empty Note***"}</h3>
         <ChecklistItems note={note} />
         <Features note={note} />
       </div>

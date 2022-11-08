@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote } from "../../store/notes";
+import CreateChecklist from "./CreateChecklist";
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
@@ -58,11 +59,14 @@ export default function NoteCreateForm() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <input placeholder="checklist" />
+              {/* <input placeholder="checklist" /> */}
               <button type="submit">Create</button>
+              <button onClick={() => onCancel()}>Cancel</button>
             </div>
           </form>
-          <button onClick={() => onCancel()}>Cancel</button>
+          <div>
+            <CreateChecklist />
+          </div>
         </div>
       ) : (
         <div style={{ backgroundColor: "pink", padding: "10px" }}>

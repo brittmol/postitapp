@@ -3,11 +3,15 @@ import { useDispatch } from "react-redux";
 import ChecklistItems from "../Notes/checklistItems";
 import Features from "../Features/Features";
 import { updateNote } from "../../store/notes";
+import AddToChecklist from "../NoteCreate/AddToChecklist";
 
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState(note?.title || "");
   const [errors, setErrors] = useState([]);
+
+  const list = note?.ChecklistItems
+  console.log('list', list)
 
   // *** escape = save
   // *** enter = new checklist item
@@ -44,7 +48,8 @@ export default function NoteEditForm({ note, onClose }) {
         onChange={(e) => setTitle(e.target.value)}
         // onKeyDown={onKeyDown}
       />
-      <ChecklistItems note={note} />
+      {/* <ChecklistItems note={note} /> */}
+      <AddToChecklist note={note} />
       <Features note={note} />
     </div>
   );
