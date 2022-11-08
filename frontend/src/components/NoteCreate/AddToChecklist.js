@@ -32,12 +32,8 @@ export default function AddToChecklist({ note }) {
       {inputList.map((x, i) => {
         return (
           <div key={x?.id}>
-            <input
-              type="text"
-              placeholder="checklist"
-              value={x?.item}
-            //   onChange={(e) => console.log(e.target.value)}
-            />
+            <input type="checkbox" id={x?.id} defaultChecked={x?.checked} />
+            <label htmlFor={x?.id}>{x?.item}</label>
             {inputList.length !== 1 && (
               <button onClick={() => handleRemoveClick(i)}>X</button>
             )}
