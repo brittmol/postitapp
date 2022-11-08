@@ -62,8 +62,9 @@ export default function AddToChecklist({ note }) {
   const onSave = () => {
     console.log("clicked save on checklist");
     const oldList = [...note?.ChecklistItems];
-    const list = [...inputList];
-    const newList = list.filter(x => x.item.length !== 0)
+    const newList = [...inputList];
+    // const list = [...inputList];
+    // const newList = list.filter(x => x.item.length !== 0)
 
     oldList.forEach((item) => {
       dispatch(removeItem(item));
