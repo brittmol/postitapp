@@ -6,7 +6,6 @@ import SignupFormPage from "./components/Auth/SignupFormPage";
 import Navigation from "./components/Navigation";
 import Notes from "./components/Notes";
 import ProtectedRoute from "./components/ProtectedRoute";
-// import NoteEditModal from "./components/NoteEdit";
 import * as sessionActions from "./store/session";
 
 export default function App() {
@@ -23,7 +22,6 @@ export default function App() {
         <Switch>
           <ProtectedRoute exact path="/">
             <Notes />
-            {/* <NoteEditModal /> */}
           </ProtectedRoute>
           <Route exact path="/login">
             <LoginFormPage />

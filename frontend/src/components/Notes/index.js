@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNotes } from "../../store/notes";
 import NoteCreateForm from "../NoteCreate";
-import NoteEditModal from "../NoteEdit/NoteEditModal";
+import SingleNote from "./SingleNote";
 
 export default function Notes() {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export default function Notes() {
       <NoteCreateForm />
       <div>
         {notesArray?.map((note) => (
-          <NoteEditModal key={note?.id} note={note} />
+          <SingleNote key={note?.id} note={note} />
         ))}
       </div>
     </>

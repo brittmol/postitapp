@@ -8,7 +8,7 @@ module.exports = {
         {
           userId: 1,
           title: "First Project",
-          color: "00ffff",
+          color: "#00ffff",
           pinned: true,
           archived: false,
           createdAt: new Date(),
@@ -25,7 +25,7 @@ module.exports = {
         {
           userId: 1,
           title: "Third Project",
-          color: "faebd7",
+          color: "#faebd7",
           pinned: false,
           archived: false,
           createdAt: new Date(),
@@ -34,7 +34,7 @@ module.exports = {
         {
           userId: 1,
           title: "Fourth Project",
-          color: "7fff00",
+          color: "#7fff00",
           pinned: false,
           archived: false,
           createdAt: new Date(),
@@ -43,7 +43,7 @@ module.exports = {
         {
           userId: 1,
           title: "Pinned Project",
-          color: "7fffd4",
+          color: "#7fffd4",
           pinned: true,
           archived: false,
           createdAt: new Date(),
@@ -52,7 +52,7 @@ module.exports = {
         {
           userId: 1,
           title: "Trash",
-          color: "a9a9a9",
+          color: "#a9a9a9",
           pinned: false,
           archived: true,
           createdAt: new Date(),
