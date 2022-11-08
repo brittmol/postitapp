@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { updateNote } from "../../store/notes";
 
 export default function PinnedAndArchived({ note }) {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const [pinned, setPinned] = useState(note?.pinned || false);
   const [archived, setArchived] = useState(note?.archived || false);
@@ -33,11 +31,6 @@ export default function PinnedAndArchived({ note }) {
     } else {
       setArchived(false);
     }
-    // if (note?.archived === true) {
-    //   history.push("/archive");
-    // } else {
-    //   history.push("/notes");
-    // }
   };
 
   return (

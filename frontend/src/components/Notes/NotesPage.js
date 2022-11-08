@@ -29,21 +29,21 @@ export default function NotesPage() {
       <div>
         <h3>Pinned</h3>
         {pinnedNotes?.map((note) => (
-          <ul>
+          <ul key={note?.id}>
             <li key={note?.id}>{note?.title}</li>
             <PinnedAndArchived note={note} />
           </ul>
         ))}
         <h3>Archived</h3>
         {archivedNotes?.map((note) => (
-          <ul>
+          <ul key={note?.id}>
             <li key={note?.id}>{note?.title}</li>
             <PinnedAndArchived note={note} />
           </ul>
         ))}
         <h3>Other</h3>
         {otherNotes?.map((note) => (
-          <ul>
+          <ul key={note?.id}>
             <li key={note?.id}>{note?.title}</li>
             <PinnedAndArchived note={note} />
           </ul>
