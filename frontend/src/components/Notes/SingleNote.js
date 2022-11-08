@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import NoteEditForm from "../NoteEdit/NoteEditForm";
 import ChecklistItems from "./checklistItems";
-import Color from "../Features/Color";
+import Features from "../Features/Features";
 
 export default function SingleNote({ note }) {
   const [showModal, setShowModal] = useState(false);
@@ -21,10 +21,7 @@ export default function SingleNote({ note }) {
         <button onClick={() => setShowModal(true)}>Edit</button>
         <h3>{note?.title}</h3>
         <ChecklistItems note={note} />
-        <p>Color: {note?.color}</p>
-        <Color note={note} />
-        <p>Pinned: {note?.pinned ? "Yes" : "X"}</p>
-        <p>Archived: {note?.archived ? "Yes" : "X"}</p>
+        <Features note={note} />
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>

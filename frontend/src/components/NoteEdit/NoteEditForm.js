@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import ChecklistItems from "../Notes/checklistItems";
-import Color from "../Features/Color";
+import Features from "../Features/Features";
 import { updateNote, removeNote } from "../../store/notes";
 
 export default function NoteEditForm({ note, onClose }) {
@@ -44,7 +44,7 @@ export default function NoteEditForm({ note, onClose }) {
       <button onClick={() => onSave()}>Save</button>
       <button onClick={() => onClose()}>Cancel</button>
       <button onClick={() => dispatch(removeNote(note))}>Delete Note</button>
-      <Color note={note} />
+      <Features note={note} />
     </div>
   );
 }

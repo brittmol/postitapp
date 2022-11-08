@@ -9,7 +9,9 @@ export default function Color({ note }) {
   const [color, setColor] = useState(note?.color || "");
 
   useEffect(() => {
-    dispatch(updateNote({ ...note, color }));
+    if (note?.color !== color) {
+      dispatch(updateNote({ ...note, color }));
+    }
   }, [dispatch, color]);
 
   return (
@@ -19,7 +21,7 @@ export default function Color({ note }) {
           inColorMode === false ? setInColorMode(true) : setInColorMode(false);
         }}
       >
-        Color inside Color Component: {color}
+        Color: {color}
       </button>
       {inColorMode && (
         <div>

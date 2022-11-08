@@ -1,17 +1,27 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateNote } from "../../store/notes";
 
-// export default function Archived({ archived, setArchived }) {
+export default function Archived({ note }) {
+  const dispatch = useDispatch();
+  const [archived, setArchived] = useState(note?.archived || false);
 
-//   return (
-//     <>
-//       <button onClick={() => setInColorMode(true)}>Color</button>
-//       {inColorMode && (
-//         <div>
-//           <button onClick={() => setColor("")}>NONE</button>
-//           <button onClick={() => setColor("blue")}>Blue</button>
-//           <button onClick={() => setColor("red")}>Red</button>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
+  useEffect(() => {
+    if (note?.archived !== archived) {
+      dispatch(updateNote({ ...note, archived }));
+    }
+  }, [dispatch, archived]);
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          archived ? setArchived(false) : setArchived(true);
+        }}
+      >
+        {note?.archived ? "Unarchive" : "Archive"}
+      </button>
+    </div>
+  );
+}
