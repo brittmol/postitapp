@@ -11,7 +11,6 @@ export default function NoteEditForm({ note, onClose }) {
   const [errors, setErrors] = useState([]);
 
   const list = note?.ChecklistItems
-  console.log('list', list)
 
   // *** escape = save
   // *** enter = new checklist item

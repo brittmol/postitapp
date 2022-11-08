@@ -17,9 +17,9 @@ export default function CreateChecklist() {
 
   const handleRemoveClick = (index) => {
     const list = [...inputList];
-    console.log('list b4', list)
+    // console.log('list b4', list)
     list.splice(index, 1);
-    console.log('list after', list)
+    // console.log('list after', list)
     setInputList(list);
   };
 

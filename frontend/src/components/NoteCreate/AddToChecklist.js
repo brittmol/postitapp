@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createItem, removeItem } from "../../store/checklist";
 
 export default function AddToChecklist({ note }) {
-
-    /*
+  /*
     - create as many checkbox input boxes as you want
     - on Save:
         -- dispatch new note w/ Title
@@ -18,35 +17,63 @@ export default function AddToChecklist({ note }) {
 
   const dispatch = useDispatch();
 
-  const [item, setItem] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [errors, setErrors] = useState([]);
+  //   const [item, setItem] = useState("");
+  //   const [checked, setChecked] = useState(false);
+  //   const [errors, setErrors] = useState([]);
 
-  const [inputList, setInputList] = useState([...note?.ChecklistItems]);
+  const oldList = [...note?.ChecklistItems];
+  const newList = [];
+  oldList.map((obj, i) => {
+    newList[i] = { item: obj.item, checked: obj.checked };
+  });
+
+  const [inputList, setInputList] = useState([
+    ...newList,
+    { item: "", checked: false },
+  ]);
   console.log("inputList", inputList);
 
   const handleAddClick = () => {
-    setInputList([...inputList, ""]);
+    setInputList([...inputList, { item: "", checked: false }]);
   };
 
   const handleRemoveClick = (index) => {
     const list = [...inputList];
-    console.log("list b4", list);
     list.splice(index, 1);
-    console.log("list after", list);
     setInputList(list);
   };
 
-  //   console.log("inputList", inputList);
+  const handleInputChange = (e, index) => {
+    const { value } = e.target;
+    const list = [...inputList];
+    list[index]["item"] = value;
+    setInputList(list);
+  };
+
+  const handleCheckedClick = (e, index) => {
+    const { checked } = e.target;
+    const list = [...inputList];
+    list[index]["checked"] = checked;
+    setInputList(list);
+  };
 
   return (
     <>
-      {/* <input placeholder="checklist" /> */}
       {inputList.map((x, i) => {
         return (
-          <div key={x?.id}>
-            <input type="checkbox" id={x?.id} defaultChecked={x?.checked} />
-            <label htmlFor={x?.id}>{x?.item}</label>
+          <div key={i}>
+            <input
+              type="checkbox"
+              id={i}
+              defaultChecked={x?.checked}
+              onClick={(e) => handleCheckedClick(e, i)}
+            />
+            <input
+              type="text"
+              placeholder="+ List item"
+              defaultValue={x?.item}
+              onChange={(e) => handleInputChange(e, i)}
+            />
             {inputList.length !== 1 && (
               <button onClick={() => handleRemoveClick(i)}>X</button>
             )}
