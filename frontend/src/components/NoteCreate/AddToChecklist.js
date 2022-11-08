@@ -11,30 +11,32 @@ export default function AddToChecklist({ note }) {
         -- loop thru new inputList
             dispatch a new checklistitem
             for each item on the list
-
-
     */
 
   const dispatch = useDispatch();
-
-  //   const [item, setItem] = useState("");
-  //   const [checked, setChecked] = useState(false);
-  //   const [errors, setErrors] = useState([]);
+  const currentNoteId = note?.id;
 
   const oldList = [...note?.ChecklistItems];
   const newList = [];
   oldList.map((obj, i) => {
-    newList[i] = { item: obj.item, checked: obj.checked };
+    newList[i] = {
+      item: obj.item,
+      checked: obj.checked,
+      noteId: currentNoteId,
+    };
   });
 
   const [inputList, setInputList] = useState([
     ...newList,
-    { item: "", checked: false },
+    { item: "", checked: false, noteId: currentNoteId },
   ]);
   console.log("inputList", inputList);
 
   const handleAddClick = () => {
-    setInputList([...inputList, { item: "", checked: false }]);
+    setInputList([
+      ...inputList,
+      { item: "", checked: false, noteId: currentNoteId },
+    ]);
   };
 
   const handleRemoveClick = (index) => {
@@ -57,32 +59,43 @@ export default function AddToChecklist({ note }) {
     setInputList(list);
   };
 
+  const onSave = () => {
+    console.log("clicked save on checklist");
+    const oldList = [...note?.ChecklistItems];
+    const newList = [...inputList];
+    oldList.forEach((item) => {
+      dispatch(removeItem(item));
+    });
+    newList.forEach((item) => {
+      dispatch(createItem(item));
+    });
+  };
+
   return (
-    <>
-      {inputList.map((x, i) => {
-        return (
-          <div key={i}>
-            <input
-              type="checkbox"
-              id={i}
-              defaultChecked={x?.checked}
-              onClick={(e) => handleCheckedClick(e, i)}
-            />
-            <input
-              type="text"
-              placeholder="+ List item"
-              defaultValue={x?.item}
-              onChange={(e) => handleInputChange(e, i)}
-            />
-            {inputList.length !== 1 && (
-              <button onClick={() => handleRemoveClick(i)}>X</button>
-            )}
-            {inputList.length - 1 === i && (
-              <button onClick={handleAddClick}>Add</button>
-            )}
-          </div>
-        );
-      })}
-    </>
+    <div>
+      {inputList.map((x, i) => (
+        <div key={i}>
+          <input
+            type="checkbox"
+            id={i}
+            defaultChecked={x?.checked}
+            onClick={(e) => handleCheckedClick(e, i)}
+          />
+          <input
+            type="text"
+            placeholder="+ List item"
+            defaultValue={x?.item}
+            onChange={(e) => handleInputChange(e, i)}
+          />
+          {inputList.length !== 1 && (
+            <button onClick={() => handleRemoveClick(i)}>X</button>
+          )}
+          {inputList.length - 1 === i && (
+            <button onClick={handleAddClick}>Add</button>
+          )}
+        </div>
+      ))}
+      <button onClick={() => onSave()}>Save Checklist Items</button>
+    </div>
   );
 }

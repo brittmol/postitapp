@@ -10,7 +10,6 @@ export default function NoteEditForm({ note, onClose }) {
   const [title, setTitle] = useState(note?.title || "");
   const [errors, setErrors] = useState([]);
 
-  const list = note?.ChecklistItems
 
   // *** escape = save
   // *** enter = new checklist item
