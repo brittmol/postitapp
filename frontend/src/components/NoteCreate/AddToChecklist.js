@@ -59,21 +59,15 @@ export default function AddToChecklist({ note }) {
   };
 
   const onSave = () => {
-    const oldList = [...note?.ChecklistItems];
     const list = [...inputList];
-    const newList = list.filter(x => x.item.length !== 0)
+    const filteredList = list.filter(x => x.item.length !== 0)
     if (oldList.length) {
       dispatch(removeChecklist(oldList)).then(() =>
-        dispatch(createChecklist(newList))
+        dispatch(createChecklist(filteredList))
       );
     } else {
-      dispatch(createChecklist(newList));
+      dispatch(createChecklist(filteredList));
     }
-  };
-
-  const onDelete = () => {
-    const oldList = [...note?.ChecklistItems];
-    dispatch(removeChecklist(oldList));
   };
 
   return (
@@ -100,7 +94,6 @@ export default function AddToChecklist({ note }) {
           )}
         </div>
       ))}
-      <button onClick={() => onDelete()}>Delete Checklist Items</button>
       <button onClick={() => onSave()}>Save Checklist Items</button>
     </div>
   );
