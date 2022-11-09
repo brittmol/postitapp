@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createItem, removeItem } from "../../store/checklist";
+import { createChecklist, removeChecklist } from "../../store/checklist";
 
 export default function AddToChecklist({ note }) {
   /*
@@ -59,18 +59,15 @@ export default function AddToChecklist({ note }) {
   };
 
   const onSave = () => {
-    console.log("clicked save on checklist");
-    const oldList = [...note?.ChecklistItems];
     const newList = [...inputList];
     // const list = [...inputList];
     // const newList = list.filter(x => x.item.length !== 0)
+    dispatch(createChecklist(newList));
+  };
 
-    oldList.forEach((item) => {
-      dispatch(removeItem(item));
-    });
-    newList.forEach((item) => {
-      dispatch(createItem(item));
-    });
+  const onDelete = () => {
+    const oldList = [...note?.ChecklistItems];
+    dispatch(removeChecklist(oldList));
   };
 
   return (
@@ -97,6 +94,7 @@ export default function AddToChecklist({ note }) {
           )}
         </div>
       ))}
+      <button onClick={() => onDelete()}>Delete Checklist Items</button>
       <button onClick={() => onSave()}>Save Checklist Items</button>
     </div>
   );

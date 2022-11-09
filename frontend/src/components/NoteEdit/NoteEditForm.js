@@ -10,7 +10,6 @@ export default function NoteEditForm({ note, onClose }) {
   const [title, setTitle] = useState(note?.title || "");
   const [errors, setErrors] = useState([]);
 
-
   // *** escape = save
   // *** enter = new checklist item
 
@@ -24,13 +23,6 @@ export default function NoteEditForm({ note, onClose }) {
     const noteData = { ...note, title };
     dispatch(updateNote(noteData));
     onClose();
-    // const updatedNote = dispatch(updateNote(noteData));
-    // if (updatedNote) {
-    //   onClose();
-    // } else {
-    //   setErrors(updatedNote);
-    //   onClose();
-    // }
   };
 
   return (
