@@ -11,22 +11,13 @@ export default function NoteCreate() {
   // --------------- useState ------------------------
   const [title, setTitle] = useState("");
   const [inCreateMode, setInCreateMode] = useState(false);
-  const [currentNote, setCurrentNote] = useState(null);
-  const [inputList, setInputList] = useState([
-    { item: "", checked: false, noteId: currentNote?.id },
-  ]);
+  const [inputList, setInputList] = useState([{ item: "", checked: false }]);
   const [errors, setErrors] = useState([]);
 
-  useEffect(() => {
-    console.log("currentNote in useEffect", currentNote);
-  }, [currentNote]);
 
   // --------------- handleClicks ------------------------
   const handleAddClick = () => {
-    setInputList([
-      ...inputList,
-      { item: "", checked: false, noteId: currentNote?.id },
-    ]);
+    setInputList([...inputList, { item: "", checked: false }]);
   };
 
   const handleRemoveClick = (index) => {
@@ -62,20 +53,17 @@ export default function NoteCreate() {
     const newNote = await dispatch(createNote(noteData));
     console.log("new note dispatch", newNote);
     if (newNote) {
-      setCurrentNote(newNote);
-      console.log("current note", currentNote);
-      if (currentNote === newNote) {
-        const list = [...inputList];
-        const newFilteredList = list.filter((x) => x.item.length !== 0);
-        if (newFilteredList.length) {
-          dispatch(createChecklist(newFilteredList));
-        }
+      const list = [...inputList];
+      const newList = list.filter((x) => x.item.length !== 0);
+      newList.forEach((x) => (x["noteId"] = newNote.id));
+      console.log("newList", newList);
+      if (newList.length) {
+        dispatch(createChecklist(newList));
       }
 
       setInCreateMode(false);
       setTitle("");
-      setInputList([{ item: "", checked: false, noteId: currentNote?.id }]);
-      setCurrentNote(null);
+      setInputList([{ item: "", checked: false }]);
     } else {
       setErrors(newNote);
     }
@@ -84,7 +72,7 @@ export default function NoteCreate() {
   const onCancel = () => {
     setTitle("");
     setInCreateMode(false);
-    setInputList([{ item: "", checked: false, noteId: currentNote?.id }]);
+    setInputList([{ item: "", checked: false }]);
   };
 
   // --------------- return ------------------------
