@@ -34,17 +34,6 @@ router.post(
   })
 );
 
-router.post(
-  "/:noteId/checklistItems",
-  requireAuth,
-  asyncHandler(async (req, res) => {
-    const { noteId } = req.params;
-    const item = await ChecklistItem.create(req.body);
-    const newItem = await ChecklistItem.findByPk(item.id);
-    return res.json(newItem);
-  })
-);
-
 router.put(
   "/:noteId",
   requireAuth,
@@ -56,18 +45,6 @@ router.put(
       include: [{ model: ChecklistItem }],
     });
     return res.json(newNote);
-  })
-);
-
-router.put(
-  "/:noteId/checklistItems/:itemId",
-  requireAuth,
-  asyncHandler(async (req, res) => {
-    const { noteId, itemId } = req.params;
-    const item = await ChecklistItem.findByPk(itemId);
-    const updatedItem = await item.update(req.body);
-    const newItem = await ChecklistItem.findByPk(updatedItem.id);
-    return res.json(newItem);
   })
 );
 
@@ -84,14 +61,39 @@ router.delete(
 );
 
 router.delete(
-  "/:noteId/checklistItems/:itemId",
+  "/:noteId/checklistItems",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { noteId, itemId } = req.params;
-    const item = await ChecklistItem.findByPk(itemId);
-    if (!item) throw new Error("Cannot find Checklist Item");
-    await item.destroy();
-    return res.json(item);
+    const { noteId } = req.params;
+    const checklist = await ChecklistItem.findAll({ where: { noteId } });
+    if (!checklist || !checklist.length)
+      throw new Error("Cannot find Checklist");
+    await checklist.forEach((item) => {
+      item.destroy();
+    });
+    return res.json(checklist);
+  })
+);
+
+router.post(
+  "/:noteId/checklistItems",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { noteId } = req.params;
+    const checklist = req.body;
+
+    // use a for loop instead of forEach or map
+          // because for every item, it passes it to a callback
+          // can be weird for racing conditions
+          // for loop keeps everything in the same scope
+    for (let i = 0; i < checklist.length; i++) {
+      const item = checklist[i];
+      await ChecklistItem.create(item);
+    }
+
+    const newChecklist = await ChecklistItem.findAll({ where: { noteId } });
+    console.log("newChecklist in backend", newChecklist);
+    return res.json(newChecklist);
   })
 );
 

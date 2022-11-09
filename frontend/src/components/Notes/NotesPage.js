@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNotes } from "../../store/notes";
-import NoteCreateForm from "../NoteCreate";
+// import NoteCreateForm from "../NoteCreate";
+import NoteCreate from "../NoteCreate/NoteCreate";
 import SingleNote from "./SingleNote";
-import PinnedAndArchived from "../Features/PinnedAndArchived";
 import NotesList from "./NotesLists";
 
 export default function NotesPage() {
@@ -13,7 +13,6 @@ export default function NotesPage() {
   const notesArray = Object.values(notes);
 
   const pinnedNotes = notesArray.filter((note) => note.pinned === true);
-  const archivedNotes = notesArray.filter((note) => note.archived === true);
 
   const otherNotes = notesArray.filter(
     (note) => note.pinned === false && note.archived === false
@@ -26,7 +25,8 @@ export default function NotesPage() {
   return (
     <>
       <h1>Notes!</h1>
-      <NoteCreateForm />
+      <NoteCreate />
+      {/* <NoteCreateForm /> */}
       {/* <NotesList notesArray={notesArray} /> */}
       <div>
         {pinnedNotes.length ? (

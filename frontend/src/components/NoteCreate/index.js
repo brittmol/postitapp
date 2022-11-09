@@ -34,12 +34,12 @@ export default function NoteCreateForm() {
 
     const newNote = dispatch(createNote(noteData));
     if (newNote) {
+      console.log('new Note', await newNote)
       setInCreateMode(false);
       setTitle("");
       setColor("");
       setPinned(false);
       setArchived(false);
-      setInCreateMode(false);
     } else {
       setErrors(newNote);
       setInCreateMode(false);
@@ -58,11 +58,14 @@ export default function NoteCreateForm() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
-              <input placeholder="checklist" />
+              {/* <input placeholder="checklist" /> */}
               <button type="submit">Create</button>
+              <button onClick={() => onCancel()}>Cancel</button>
             </div>
           </form>
-          <button onClick={() => onCancel()}>Cancel</button>
+          <div>
+            {/* <CreateChecklist /> */}
+          </div>
         </div>
       ) : (
         <div style={{ backgroundColor: "pink", padding: "10px" }}>
