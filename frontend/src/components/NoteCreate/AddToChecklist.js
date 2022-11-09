@@ -59,10 +59,16 @@ export default function AddToChecklist({ note }) {
   };
 
   const onSave = () => {
-    const newList = [...inputList];
-    // const list = [...inputList];
-    // const newList = list.filter(x => x.item.length !== 0)
-    dispatch(createChecklist(newList));
+    const oldList = [...note?.ChecklistItems];
+    const list = [...inputList];
+    const newList = list.filter(x => x.item.length !== 0)
+    if (oldList.length) {
+      dispatch(removeChecklist(oldList)).then(() =>
+        dispatch(createChecklist(newList))
+      );
+    } else {
+      dispatch(createChecklist(newList));
+    }
   };
 
   const onDelete = () => {
@@ -86,7 +92,7 @@ export default function AddToChecklist({ note }) {
             value={x?.item}
             onChange={(e) => handleInputChange(e, i)}
           />
-          {inputList.length !== 1 && (
+          {inputList.length !== 0 && (
             <button onClick={() => handleRemoveClick(i)}>X {i}</button>
           )}
           {inputList.length - 1 === i && (
