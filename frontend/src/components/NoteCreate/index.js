@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote } from "../../store/notes";
-import CreateChecklist from "./CreateChecklist";
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
@@ -35,12 +34,12 @@ export default function NoteCreateForm() {
 
     const newNote = dispatch(createNote(noteData));
     if (newNote) {
+      console.log('new Note', await newNote)
       setInCreateMode(false);
       setTitle("");
       setColor("");
       setPinned(false);
       setArchived(false);
-      setInCreateMode(false);
     } else {
       setErrors(newNote);
       setInCreateMode(false);
@@ -65,7 +64,7 @@ export default function NoteCreateForm() {
             </div>
           </form>
           <div>
-            <CreateChecklist />
+            {/* <CreateChecklist /> */}
           </div>
         </div>
       ) : (

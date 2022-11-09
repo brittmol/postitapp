@@ -92,8 +92,6 @@ router.post(
     }
 
     const newChecklist = await ChecklistItem.findAll({ where: { noteId } });
-    // TODO: fix newCheckList being passed thru
-    // it cant find all for some reason
     console.log("newChecklist in backend", newChecklist);
     return res.json(newChecklist);
   })
