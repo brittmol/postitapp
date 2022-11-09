@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import ChecklistItems from "../Notes/checklistItems";
 import Features from "../Features/Features";
 import { updateNote } from "../../store/notes";
 import { createChecklist, removeChecklist } from "../../store/checklist";
-// import AddToChecklist from "../NoteCreate/AddToChecklist";
 
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
+  /*    TODO:
+  - change add to list part, so when you add to input field it automatically adds new input
+  - fix store action for adding new list
+  - fix checklist delete and add so there are not so many ids?
+  - fix checkbox when you remove element, something about defaultChecked?
+  - ability to save without pressing a button (onClose)
+  - press enter or escape
+
+      BONUS:
+  - BONUS: add ability to drag elements up and down
+  - BONUS: Edited time
+
+
+  */
 
   // *** escape = save
   // *** enter = new checklist item
@@ -70,18 +82,22 @@ export default function NoteEditForm({ note, onClose }) {
   const onSave = () => {
     const noteData = { ...note, title };
     const list = [...inputList];
-    const filteredList = list.filter((x) => x.item.length !== 0);
-    if (oldList.length) {
+    const newFilteredList = list.filter((x) => x.item.length !== 0);
+    if (oldList.length && newFilteredList.length) {
       dispatch(removeChecklist(oldList)).then(() =>
-        dispatch(createChecklist(filteredList)).then(() =>
+        dispatch(createChecklist(newFilteredList)).then(() =>
           dispatch(updateNote(noteData)).then(() => onClose())
         )
       );
-    } else if (filteredList.length) {
-      dispatch(createChecklist(filteredList)).then(() =>
+    } else if (oldList.length && !newFilteredList.length) {
+      dispatch(removeChecklist(oldList)).then(() =>
         dispatch(updateNote(noteData)).then(() => onClose())
       );
-    } else {
+    } else if (!oldList.length && newFilteredList.length) {
+      dispatch(createChecklist(newFilteredList)).then(() =>
+        dispatch(updateNote(noteData)).then(() => onClose())
+      );
+    } else if (!oldList.length && !newFilteredList.length) {
       dispatch(updateNote(noteData)).then(() => onClose());
     }
   };
@@ -127,9 +143,6 @@ export default function NoteEditForm({ note, onClose }) {
           </div>
         ))}
       </div>
-
-      {/* <ChecklistItems note={note} /> */}
-      {/* <AddToChecklist note={note} /> */}
       <Features note={note} />
     </div>
   );
