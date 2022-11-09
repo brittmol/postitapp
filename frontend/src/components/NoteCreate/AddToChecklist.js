@@ -30,7 +30,6 @@ export default function AddToChecklist({ note }) {
     ...newList,
     { item: "", checked: false, noteId: currentNoteId },
   ]);
-  console.log("inputList", inputList);
 
   const handleAddClick = () => {
     setInputList([
@@ -87,11 +86,11 @@ export default function AddToChecklist({ note }) {
           <input
             type="text"
             placeholder="+ List item"
-            defaultValue={x?.item}
+            value={x?.item}
             onChange={(e) => handleInputChange(e, i)}
           />
           {inputList.length !== 1 && (
-            <button onClick={() => handleRemoveClick(i)}>X</button>
+            <button onClick={() => handleRemoveClick(i)}>X {i}</button>
           )}
           {inputList.length - 1 === i && (
             <button onClick={handleAddClick}>Add</button>
