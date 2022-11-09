@@ -81,13 +81,20 @@ router.post(
   asyncHandler(async (req, res) => {
     const { noteId } = req.params;
     const checklist = req.body;
-    checklist.forEach(async (item) => {
+
+    // use a for loop instead of forEach or map
+          // because for every item, it passes it to a callback
+          // can be weird for racing conditions
+          // for loop keeps everything in the same scope
+    for (let i = 0; i < checklist.length; i++) {
+      const item = checklist[i];
       await ChecklistItem.create(item);
-    });
+    }
+
     const newChecklist = await ChecklistItem.findAll({ where: { noteId } });
     // TODO: fix newCheckList being passed thru
-            // it cant find all for some reason
-    console.log('newChecklist in backend', newChecklist)
+    // it cant find all for some reason
+    console.log("newChecklist in backend", newChecklist);
     return res.json(newChecklist);
   })
 );
