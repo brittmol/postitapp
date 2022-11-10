@@ -1,29 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote } from "../../store/notes";
+import { createChecklist } from "../../store/checklist";
+import Features from "../Features/Features";
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.sessionReducer.user);
 
+  // --------------- useState ------------------------
+  const [inCreateMode, setInCreateMode] = useState(false);
   const [title, setTitle] = useState("");
-  const [color, setColor] = useState("");
+  const [inputList, setInputList] = useState([{ item: "", checked: false }]);
+  const [color, setColor] = useState(null);
   const [pinned, setPinned] = useState(false);
   const [archived, setArchived] = useState(false);
   const [errors, setErrors] = useState([]);
-  const [inCreateMode, setInCreateMode] = useState(false);
 
-  const onCancel = () => {
-    setTitle("");
-    setColor("");
-    setPinned(false);
-    setArchived(false);
-    setInCreateMode(false);
+  // --------------- handleClicks ------------------------
+  const handleAddClick = () => {
+    setInputList([...inputList, { item: "", checked: false }]);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleRemoveClick = (index) => {
+    const list = [...inputList];
+    list.splice(index, 1);
+    setInputList(list);
+  };
 
+  const handleInputChange = (e, index) => {
+    const { value } = e.target;
+    const list = [...inputList];
+    list[index]["item"] = value;
+    setInputList(list);
+  };
+
+  const handleCheckedClick = (e, index) => {
+    const { checked } = e.target;
+    const list = [...inputList];
+    list[index]["checked"] = checked;
+    setInputList(list);
+  };
+
+  // --------------- onSave ------------------------
+  const onSave = async () => {
     const noteData = {
       userId: user.id,
       title,
@@ -32,39 +52,81 @@ export default function NoteCreateForm() {
       archived,
     };
 
-    const newNote = dispatch(createNote(noteData));
+    const newNote = await dispatch(createNote(noteData));
+    console.log("new note dispatch", newNote);
     if (newNote) {
-      console.log('new Note', await newNote)
+      const list = [...inputList];
+      const newList = list.filter((x) => x.item.length !== 0);
+      newList.forEach((x) => (x["noteId"] = newNote.id));
+      console.log("newList", newList);
+      if (newList.length) {
+        dispatch(createChecklist(newList));
+      }
+
       setInCreateMode(false);
       setTitle("");
-      setColor("");
+      setInputList([{ item: "", checked: false }]);
+      setColor(null);
       setPinned(false);
       setArchived(false);
     } else {
       setErrors(newNote);
-      setInCreateMode(false);
     }
   };
+
+  // --------------- onCancel ------------------------
+
+  const onCancel = () => {
+    setInCreateMode(false);
+    setTitle("");
+    setInputList([{ item: "", checked: false }]);
+    setColor(null);
+    setPinned(false);
+    setArchived(false);
+  };
+
+  // --------------- return ------------------------
 
   return (
     <>
       {inCreateMode ? (
-        // <div onBlur={() => setInCreateMode(false)}>
         <div style={{ backgroundColor: "pink", padding: "10px" }}>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                placeholder="Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-              {/* <input placeholder="checklist" /> */}
-              <button type="submit">Create</button>
-              <button onClick={() => onCancel()}>Cancel</button>
-            </div>
-          </form>
           <div>
-            {/* <CreateChecklist /> */}
+            <input
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <button onClick={() => onSave()}>Create</button>
+            <button onClick={() => onCancel()}>Cancel</button>
+          </div>
+          <div>
+            <div>
+              {inputList.map((x, i) => (
+                <div key={i}>
+                  <input
+                    type="checkbox"
+                    id={i}
+                    defaultChecked={x?.checked}
+                    onClick={(e) => handleCheckedClick(e, i)}
+                  />
+                  <input
+                    type="text"
+                    placeholder="+ List item"
+                    value={x?.item}
+                    onChange={(e) => handleInputChange(e, i)}
+                  />
+                  {inputList.length !== 0 && (
+                    <button onClick={() => handleRemoveClick(i)}>X {i}</button>
+                  )}
+                  {inputList.length - 1 === i && (
+                    <button onClick={handleAddClick}>Add</button>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* <Features note={note} /> */}
           </div>
         </div>
       ) : (

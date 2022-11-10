@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
-import NoteEditForm from "../NoteEdit/NoteEditForm";
+import NoteEditForm from "../NoteEdit"
 import ChecklistItems from "./checklistItems";
 import Features from "../Features/Features";
 

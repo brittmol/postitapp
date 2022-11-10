@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getNotes } from "../../store/notes";
-// import NoteCreateForm from "../NoteCreate";
-import NoteCreate from "../NoteCreate/NoteCreate";
+import NoteCreateForm from "../NoteCreate";
 import SingleNote from "./SingleNote";
 import NotesList from "./NotesLists";
 
@@ -25,8 +24,7 @@ export default function NotesPage() {
   return (
     <>
       <h1>Notes!</h1>
-      <NoteCreate />
-      {/* <NoteCreateForm /> */}
+      <NoteCreateForm />
       {/* <NotesList notesArray={notesArray} /> */}
       <div>
         {pinnedNotes.length ? (
