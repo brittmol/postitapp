@@ -8,10 +8,9 @@ import PinnedAndArchived from "../Features/PinnedAndArchived";
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
   /*    TODO:
-  - change add to list part, so when you add to input field it automatically adds new input
-  - fix store action for adding new list
-  - fix checklist delete and add so there are not so many ids?
   - fix checkbox when you remove element, something about defaultChecked?
+  - change add to list part, so when you add to input field it automatically adds new input
+  - fix checklist delete and add so there are not so many ids?
   - ability to save without pressing a button (onClose)
   - press enter or escape
 
@@ -64,7 +63,8 @@ export default function NoteEditForm({ note, onClose }) {
 
   const handleRemoveClick = (index) => {
     const list = [...inputList];
-    list.splice(index, 1);
+    console.log(list.splice(index, 1));
+    console.log("list", list);
     setInputList(list);
   };
 
