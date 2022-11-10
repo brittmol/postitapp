@@ -1,19 +1,6 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { updateNote } from "../../store/notes";
+import React from "react";
 
-export default function PinnedAndArchived({ note }) {
-  const dispatch = useDispatch();
-
-  const [pinned, setPinned] = useState(note?.pinned || false);
-  const [archived, setArchived] = useState(note?.archived || false);
-
-  useEffect(() => {
-    if (note?.pinned !== pinned || note?.archived !== archived) {
-      dispatch(updateNote({ ...note, pinned, archived }));
-    }
-  }, [dispatch, pinned, archived]);
+export default function PinnedAndArchived({ pinned, setPinned, archived, setArchived }) {
 
   const clickPinned = () => {
     if (pinned === false) {
@@ -37,12 +24,12 @@ export default function PinnedAndArchived({ note }) {
     <div>
       <div>
         <button onClick={() => clickPinned()}>
-          {note?.pinned ? "Unpin" : "Pin"}
+          {pinned ? "Unpin" : "Pin"}
         </button>
       </div>
       <div>
         <button onClick={() => clickArchived()}>
-          {note?.archived ? "Unarchive" : "Archive"}
+          {archived ? "Unarchive" : "Archive"}
         </button>
       </div>
     </div>

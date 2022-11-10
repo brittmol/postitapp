@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote } from "../../store/notes";
 import { createChecklist } from "../../store/checklist";
-import Features from "../Features/Features";
+// import Features from "../Features/Features";
+import Color from "../Features/Color";
+import PinnedAndArchived from "../Features/PinnedAndArchived";
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
@@ -90,7 +92,7 @@ export default function NoteCreateForm() {
   return (
     <>
       {inCreateMode ? (
-        <div style={{ backgroundColor: "pink", padding: "10px" }}>
+        <div style={{ backgroundColor: color || "orange", padding: "10px" }}>
           <div>
             <input
               type="text"
@@ -127,10 +129,19 @@ export default function NoteCreateForm() {
               ))}
             </div>
             {/* <Features note={note} /> */}
+            <div>
+              <Color color={color} setColor={setColor} />
+              <PinnedAndArchived
+                pinned={pinned}
+                setPinned={setPinned}
+                archived={archived}
+                setArchived={setArchived}
+              />
+            </div>
           </div>
         </div>
       ) : (
-        <div style={{ backgroundColor: "pink", padding: "10px" }}>
+        <div style={{ backgroundColor: "orange", padding: "10px" }}>
           <input
             placeholder="Take a note..."
             onFocus={() => setInCreateMode(true)}

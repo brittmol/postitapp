@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import Features from "../Features/Features";
 import { updateNote } from "../../store/notes";
 import { createChecklist, removeChecklist } from "../../store/checklist";
+// import Features from "../Features/Features";
+import Color from "../Features/Color";
+import PinnedAndArchived from "../Features/PinnedAndArchived";
 
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
@@ -48,6 +50,9 @@ export default function NoteEditForm({ note, onClose }) {
     ...newList,
     { item: "", checked: false, noteId: currentNoteId },
   ]);
+  const [color, setColor] = useState(note?.color || null);
+  const [pinned, setPinned] = useState(note?.pinned || false);
+  const [archived, setArchived] = useState(note?.archived || false);
   const [errors, setErrors] = useState([]);
 
   // --------------- handleClicks ------------------------
@@ -80,7 +85,7 @@ export default function NoteEditForm({ note, onClose }) {
 
   // --------------- onSave ------------------------
   const onSave = () => {
-    const noteData = { ...note, title };
+    const noteData = { ...note, title, color, pinned, archived };
     const list = [...inputList];
     const newFilteredList = list.filter((x) => x.item.length !== 0);
     if (oldList.length && newFilteredList.length) {
@@ -105,7 +110,7 @@ export default function NoteEditForm({ note, onClose }) {
   // --------------- return ------------------------
 
   return (
-    <div id="note-modal" style={{ backgroundColor: note?.color }}>
+    <div id="note-modal" style={{ backgroundColor: color }}>
       <div>
         <button onClick={() => onSave()}>Save</button>
         <button onClick={() => onClose()}>Cancel</button>
@@ -143,7 +148,16 @@ export default function NoteEditForm({ note, onClose }) {
           </div>
         ))}
       </div>
-      <Features note={note} />
+      {/* <Features note={note} /> */}
+      <div>
+        <Color color={color} setColor={setColor} />
+        <PinnedAndArchived
+          pinned={pinned}
+          setPinned={setPinned}
+          archived={archived}
+          setArchived={setArchived}
+        />
+      </div>
     </div>
   );
 }
