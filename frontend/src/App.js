@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import LoginFormPage from "./components/Auth/LoginFormPage";
 import SignupFormPage from "./components/Auth/SignupFormPage";
@@ -16,7 +16,6 @@ export default function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
-  // const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <>
