@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Switch, Redirect } from "react-router-dom";
 import LoginFormPage from "./components/Auth/LoginFormPage";
 import SignupFormPage from "./components/Auth/SignupFormPage";
 import Navigation from "./components/Navigation";
@@ -16,12 +16,16 @@ export default function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+  // const sessionUser = useSelector((state) => state.session.user);
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/login" /> || <Redirect to="/notes" />
+          </Route>
           <ProtectedRoute exact path="/notes">
             <SideBar />
             <NotesPage />
