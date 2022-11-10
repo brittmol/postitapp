@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateNote } from "../../store/notes";
+import { updateNote, removeNote } from "../../store/notes";
 import { createChecklist, removeChecklist } from "../../store/checklist";
-// import Features from "../Features/Features";
 import Color from "../Features/Color";
 import PinnedAndArchived from "../Features/PinnedAndArchived";
 
@@ -148,7 +147,6 @@ export default function NoteEditForm({ note, onClose }) {
           </div>
         ))}
       </div>
-      {/* <Features note={note} /> */}
       <div>
         <Color color={color} setColor={setColor} />
         <PinnedAndArchived
@@ -157,6 +155,7 @@ export default function NoteEditForm({ note, onClose }) {
           archived={archived}
           setArchived={setArchived}
         />
+        <button onClick={() => dispatch(removeNote(note))}>Delete Note</button>
       </div>
     </div>
   );

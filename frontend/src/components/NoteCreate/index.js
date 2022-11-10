@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote } from "../../store/notes";
 import { createChecklist } from "../../store/checklist";
-// import Features from "../Features/Features";
 import Color from "../Features/Color";
 import PinnedAndArchived from "../Features/PinnedAndArchived";
 
@@ -128,7 +127,6 @@ export default function NoteCreateForm() {
                 </div>
               ))}
             </div>
-            {/* <Features note={note} /> */}
             <div>
               <Color color={color} setColor={setColor} />
               <PinnedAndArchived
