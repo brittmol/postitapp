@@ -7,29 +7,6 @@ import PinnedAndArchived from "../Features/PinnedAndArchived";
 
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
-  /*    TODO:
-  - fix checkbox when you remove element, something about defaultChecked?
-  - change add to list part, so when you add to input field it automatically adds new input
-  - fix checklist delete and add so there are not so many ids?
-  - ability to save without pressing a button (onClose)
-  - press enter or escape
-
-      BONUS:
-  - BONUS: add ability to drag elements up and down
-  - BONUS: Edited time
-
-
-  */
-
-  // *** escape = save
-  // *** enter = new checklist item
-
-  //   const onKeyDown = (event) => {
-  //     if (event.key === "Enter" || event.key === "Escape") {
-  //       event.target.blur();
-  //     }
-  //   }
-
   const currentNoteId = note?.id;
 
   const oldList = [...note?.ChecklistItems];
@@ -120,7 +97,6 @@ export default function NoteEditForm({ note, onClose }) {
           placeholder={title}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          // onKeyDown={onKeyDown}
         />
       </div>
       <div>
