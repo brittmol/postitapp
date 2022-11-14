@@ -109,7 +109,7 @@ export default function NoteCreateForm() {
                   <input
                     type="checkbox"
                     id={i}
-                    defaultChecked={x?.checked}
+                    checked={x?.checked}
                     onClick={(e) => handleCheckedClick(e, i)}
                   />
                   <input

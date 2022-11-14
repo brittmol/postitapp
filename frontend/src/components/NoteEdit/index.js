@@ -105,7 +105,7 @@ export default function NoteEditForm({ note, onClose }) {
             <input
               type="checkbox"
               id={i}
-              defaultChecked={x?.checked}
+              checked={x?.checked}
               onClick={(e) => handleCheckedClick(e, i)}
             />
             <input
@@ -113,9 +113,9 @@ export default function NoteEditForm({ note, onClose }) {
               placeholder="+ List item"
               value={x?.item}
               onChange={(e) => handleInputChange(e, i)}
-            />
+              />
             {inputList.length !== 0 && (
-              <button onClick={() => handleRemoveClick(i)}>X {i}</button>
+              <button onClick={() => handleRemoveClick(i)}>X {i} {x?.checked ? 'checked' : 'NO'}</button>
             )}
             {inputList.length - 1 === i && (
               <button onClick={handleAddClick}>Add</button>
