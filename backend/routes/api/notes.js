@@ -97,4 +97,16 @@ router.post(
   })
 );
 
+router.put(
+  "/:noteId/checklistItems/:itemId",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { noteId, itemId } = req.params;
+    const item = await ChecklistItem.findByPk(itemId);
+    const updatedItem = await item.update(req.body);
+    const newItem = await ChecklistItem.findByPk(updatedItem.id);
+    return res.json(newItem);
+  })
+);
+
 module.exports = router;

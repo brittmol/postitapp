@@ -1,6 +1,11 @@
 import { csrfFetch } from "./csrf";
 
 // ----------------- ACTIONS ----------------------------------
+const EDIT_ITEM = "checklist/editItem";
+const editItem = (item) => ({
+  type: EDIT_ITEM,
+  item,
+});
 
 const ADD_CHECKLIST = "checklist/addChecklist";
 const addChecklist = (checklist) => ({
@@ -45,11 +50,38 @@ export const removeChecklist = (data) => async (dispatch) => {
   }
 };
 
+export const updateItem = (data) => async (dispatch) => {
+  const res = await csrfFetch(
+    `/api/notes/${data.noteId}/checklistItems/${data.id}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (res.ok) {
+    const item = await res.json();
+    dispatch(editItem(item));
+    return item;
+  } else if (res.status < 500) {
+    const item = await res.json();
+    if (item.errors) return item.errors;
+  } else {
+    return ["Error, try editing checklist item again"];
+  }
+};
+
 // ----------------- REDUCER ----------------------------------
 
 export default function checklistReducer(state = {}, action) {
   let newState = {};
   switch (action.type) {
+    case EDIT_ITEM:
+      newState = { ...state };
+      newState[action.item.id] = action.item;
+      console.log("new state under add item", newState);
+      return newState
     case ADD_CHECKLIST:
       newState = { ...state };
       action.checklist.forEach((el) => {
