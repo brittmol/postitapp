@@ -54,8 +54,7 @@ export default function NoteCreateForm() {
     };
 
     const newNote = await dispatch(createNote(noteData));
-    console.log("new note dispatch", newNote);
-    if (newNote) {
+    if (newNote && inputList.length) {
       const list = [...inputList];
       const newList = list.filter((x) => x.item.length !== 0);
       newList.forEach((x) => (x["noteId"] = newNote.id));

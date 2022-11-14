@@ -25,7 +25,6 @@ export const createChecklist = (data) => async (dispatch) => {
 
   if (res.ok) {
     const checklist = await res.json();
-    console.log('checklist in thunk', checklist)
     dispatch(addChecklist(checklist));
     return checklist;
   } else if (res.status < 500) {
@@ -37,12 +36,9 @@ export const createChecklist = (data) => async (dispatch) => {
 };
 
 export const removeChecklist = (data) => async (dispatch) => {
-  const res = await csrfFetch(
-    `/api/notes/${data[0].noteId}/checklistItems`,
-    {
-      method: "DELETE",
-    }
-  );
+  const res = await csrfFetch(`/api/notes/${data[0].noteId}/checklistItems`, {
+    method: "DELETE",
+  });
   if (res.ok) {
     const checklist = await res.json();
     dispatch(deleteChecklist(checklist));
@@ -55,9 +51,9 @@ export default function checklistReducer(state = {}, action) {
   let newState = {};
   switch (action.type) {
     case ADD_CHECKLIST:
-      newState = {...state}
-      action.checklist.forEach(el => {
-        newState[el.id] = el.item
+      newState = { ...state };
+      action.checklist.forEach((el) => {
+        newState[el.id] = el.item;
       });
       return newState;
     case DELETE_CHECKLIST:
