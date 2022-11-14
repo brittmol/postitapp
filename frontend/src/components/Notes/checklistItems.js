@@ -5,20 +5,20 @@ import { updateItem } from "../../store/checklist";
 export default function ChecklistItems({ note }) {
   const dispatch = useDispatch();
   const [inputList, setInputList] = useState(note?.ChecklistItems);
-  console.log("inputlist", inputList);
 
   const handleCheckedClick = (e, ch, i) => {
     const { checked } = e.target;
     ch["checked"] = checked;
     const list = [...inputList];
-    list[i] = ch
-    setInputList(list)
+    list[i] = ch;
+    setInputList(list);
     dispatch(updateItem(ch));
   };
 
+
   return (
     <>
-      {inputList.map((ch, i) => (
+      {note?.ChecklistItems?.map((ch, i) => (
         <div key={ch?.id}>
           <input
             type="checkbox"

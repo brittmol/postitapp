@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
-import NoteEditForm from "../NoteEdit"
+import NoteEditForm from "../NoteEdit";
 import ChecklistItems from "./checklistItems";
 import Features from "../Features/Features";
 
@@ -10,11 +10,6 @@ export default function SingleNote({ note }) {
   const onCloseModal = () => {
     setShowModal(false);
   };
-
-  // useEffect(() => {
-  //   console.log('note', note)
-  //   console.log('checklist', note?.ChecklistItems)
-  // },[note?.ChecklistItems])
 
   return (
     <>

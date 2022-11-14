@@ -83,9 +83,9 @@ router.post(
     const checklist = req.body;
 
     // use a for loop instead of forEach or map
-          // because for every item, it passes it to a callback
-          // can be weird for racing conditions
-          // for loop keeps everything in the same scope
+    // because for every item, it passes it to a callback
+    // can be weird for racing conditions
+    // for loop keeps everything in the same scope
     for (let i = 0; i < checklist.length; i++) {
       const item = checklist[i];
       await ChecklistItem.create(item);
@@ -94,6 +94,16 @@ router.post(
     const newChecklist = await ChecklistItem.findAll({ where: { noteId } });
     console.log("newChecklist in backend", newChecklist);
     return res.json(newChecklist);
+  })
+);
+
+router.get(
+  "/:noteId/checklistItems",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { noteId } = req.params;
+    const oldChecklist = await ChecklistItem.findAll({ where: { noteId } });
+    return res.json(oldChecklist);
   })
 );
 
@@ -108,5 +118,44 @@ router.put(
     return res.json(newItem);
   })
 );
+
+// router.put(
+//   "/:noteId/checklistItems",
+//   requireAuth,
+//   asyncHandler(async (req, res) => {
+//     const { noteId } = req.params;
+//     const checklist = req.body;
+//     const oldChecklist = await ChecklistItem.findAll({ where: { noteId } });
+
+//     if (!checklist.length) {
+//       for (let i = 0; i < oldChecklist.length; i++) {
+//         const item = oldChecklist[i];
+//         await item.destroy();
+//       }
+//     } else if (!oldChecklist.length) {
+//       for (let i = 0; i < checklist.length; i++) {
+//         const item = checklist[i];
+//         await ChecklistItem.create(item);
+//       }
+//     } else {
+//       for (let i = 0; i < checklist.length; i++) {
+//         const item = checklist[i];
+//         // const oldItem = oldChecklist[i]
+//         const oldItem = await ChecklistItem.findByPk(item.id);
+//         if (oldItem) {
+//           await oldItem.update(item);
+//         } else {
+//           await ChecklistItem.create(item);
+//         }
+//       }
+//     }
+
+//     const newChecklist = await ChecklistItem.findAll({ where: { noteId } });
+//     console.log("newChecklist in backend", newChecklist);
+//     return res.json(newChecklist);
+//   })
+// );
+
+
 
 module.exports = router;

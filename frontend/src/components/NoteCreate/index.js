@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createNote } from "../../store/notes";
+import { createNote, updateNote } from "../../store/notes";
 import { createChecklist } from "../../store/checklist";
 import Color from "../Features/Color";
 import PinnedAndArchived from "../Features/PinnedAndArchived";
@@ -58,9 +58,9 @@ export default function NoteCreateForm() {
       const list = [...inputList];
       const newList = list.filter((x) => x.item.length !== 0);
       newList.forEach((x) => (x["noteId"] = newNote.id));
-      console.log("newList", newList);
       if (newList.length) {
         dispatch(createChecklist(newList));
+        dispatch(updateNote(newNote));
       }
 
       setInCreateMode(false);

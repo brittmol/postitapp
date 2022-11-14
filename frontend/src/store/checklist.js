@@ -80,7 +80,6 @@ export default function checklistReducer(state = {}, action) {
     case EDIT_ITEM:
       newState = { ...state };
       newState[action.item.id] = action.item;
-      console.log("new state under add item", newState);
       return newState
     case ADD_CHECKLIST:
       newState = { ...state };
