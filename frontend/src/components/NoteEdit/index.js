@@ -115,7 +115,7 @@ export default function NoteEditForm({ note, onClose }) {
               onChange={(e) => handleInputChange(e, i)}
               />
             {inputList.length !== 0 && (
-              <button onClick={() => handleRemoveClick(i)}>X {i} {x?.checked ? 'checked' : 'NO'}</button>
+              <button onClick={() => handleRemoveClick(i)}>X</button>
             )}
             {inputList.length - 1 === i && (
               <button onClick={handleAddClick}>Add</button>

@@ -118,7 +118,7 @@ export default function NoteCreateForm() {
                     onChange={(e) => handleInputChange(e, i)}
                   />
                   {inputList.length !== 0 && (
-                    <button onClick={() => handleRemoveClick(i)}>X {i}</button>
+                    <button onClick={() => handleRemoveClick(i)}>X</button>
                   )}
                   {inputList.length - 1 === i && (
                     <button onClick={handleAddClick}>Add</button>

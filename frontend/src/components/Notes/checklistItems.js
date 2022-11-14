@@ -25,9 +25,7 @@ export default function ChecklistItems({ note }) {
             checked={ch?.checked}
             onClick={(e) => handleCheckedClick(e, ch, i)}
           />
-          <label htmlFor={ch?.id}>
-            {ch?.item} ----------{ch?.checked ? "Checked" : "NO"}
-          </label>
+          <label htmlFor={ch?.id}>{ch?.item}</label>
         </div>
       ))}
       {/* <ul key={note?.id}>
