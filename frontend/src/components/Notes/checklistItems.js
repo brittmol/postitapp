@@ -15,7 +15,6 @@ export default function ChecklistItems({ note }) {
     dispatch(updateItem(ch));
   };
 
-
   return (
     <>
       {note?.ChecklistItems?.map((ch, i) => (
