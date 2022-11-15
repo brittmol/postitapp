@@ -22,34 +22,34 @@ export default function NotesPage() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="NotesPage">
       <h1>Notes!</h1>
       <NoteCreateForm />
       {/* <NotesList notesArray={notesArray} /> */}
       <div>
         {pinnedNotes.length ? (
           <div>
-            <div>
-              <h3>Pinned Notes</h3>
+            <h3>Pinned Notes</h3>
+            <div className="allNotes">
               {pinnedNotes?.map((note) => (
                 <SingleNote key={note?.id} note={note} />
               ))}
             </div>
-            <div>
-              <h3>Other Notes</h3>
+            <h3>Other Notes</h3>
+            <div className="allNotes">
               {otherNotes?.map((note) => (
                 <SingleNote key={note?.id} note={note} />
               ))}
             </div>
           </div>
         ) : (
-          <div>
+          <div className="allNotes">
             {otherNotes?.map((note) => (
               <SingleNote key={note?.id} note={note} />
             ))}
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

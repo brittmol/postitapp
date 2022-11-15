@@ -15,17 +15,19 @@ export default function ArchivePage() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className="NotesPage">
       {archivedNotes.length ? (
         <div>
           <h3>Archived Notes</h3>
-          {archivedNotes?.map((note) => (
-            <SingleNote key={note?.id} note={note} />
-          ))}
+          <div className="allNotes">
+            {archivedNotes?.map((note) => (
+              <SingleNote key={note?.id} note={note} />
+            ))}
+          </div>
         </div>
       ) : (
         <h1>Nothing Archived</h1>
       )}
-    </>
+    </div>
   );
 }

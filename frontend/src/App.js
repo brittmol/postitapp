@@ -4,11 +4,11 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import LoginFormPage from "./components/Auth/LoginFormPage";
 import SignupFormPage from "./components/Auth/SignupFormPage";
 import Navigation from "./components/Navigation";
+import SideBar from "./components/Navigation/SideBar";
 import NotesPage from "./components/Notes/NotesPage";
-import ArchivePage from "./components/Notes/ArchivePage"
+import ArchivePage from "./components/Notes/ArchivePage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import * as sessionActions from "./store/session";
-import SideBar from "./components/Navigation/SideBar";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -26,12 +26,16 @@ export default function App() {
             <Redirect to="/login" /> || <Redirect to="/notes" />
           </Route>
           <ProtectedRoute exact path="/notes">
-            <SideBar />
-            <NotesPage />
+            <div className="WholePage">
+              <SideBar />
+              <NotesPage />
+            </div>
           </ProtectedRoute>
           <ProtectedRoute exact path="/archive">
-            <SideBar />
-            <ArchivePage />
+            <div className="WholePage">
+              <SideBar />
+              <ArchivePage />
+            </div>
           </ProtectedRoute>
           <Route exact path="/login">
             <LoginFormPage />
