@@ -5,9 +5,6 @@ import { createChecklist } from "../../store/checklist";
 import Color from "../Features/Color";
 import PinnedAndArchived from "../Features/PinnedAndArchived";
 
-// editing input list stuff
-// { item: "", checked: false }
-
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.sessionReducer.user);
@@ -138,11 +135,6 @@ export default function NoteCreateForm() {
                 </div>
               ))}
             </div>
-            {/* <input
-              type="text"
-              placeholder="Add item"
-              onClick={handleAddClick}
-            /> */}
             <button onClick={handleAddClick}>+ List Item</button>
             <div>
               <Color color={color} setColor={setColor} />

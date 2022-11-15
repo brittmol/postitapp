@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateNote, removeNote } from "../../store/notes";
 import { createChecklist, removeChecklist } from "../../store/checklist";
@@ -21,27 +21,28 @@ export default function NoteEditForm({ note, onClose }) {
 
   // --------------- useState ------------------------
   const [title, setTitle] = useState(note?.title || "");
-  const [inputList, setInputList] = useState([
-    ...newList,
-    { item: "", checked: false, noteId: currentNoteId },
-  ]);
+  const [inputList, setInputList] = useState([...newList]);
   const [color, setColor] = useState(note?.color || null);
   const [pinned, setPinned] = useState(note?.pinned || false);
   const [archived, setArchived] = useState(note?.archived || false);
   const [errors, setErrors] = useState([]);
 
+  useEffect(() => {
+    inputList.length &&
+      inputList[inputList.length - 1].item.length === 0 &&
+      document.getElementById(`chItem${inputList.length - 1}`).focus();
+  }, [inputList.length]);
+
   // --------------- handleClicks ------------------------
   const handleAddClick = () => {
-    setInputList([
-      ...inputList,
-      { item: "", checked: false, noteId: currentNoteId },
-    ]);
+    const list = [...inputList];
+    list.push({ item: "", checked: false, noteId: currentNoteId });
+    setInputList(list);
   };
 
   const handleRemoveClick = (index) => {
     const list = [...inputList];
-    console.log(list.splice(index, 1));
-    console.log("list", list);
+    list.splice(index, 1);
     setInputList(list);
   };
 
@@ -110,19 +111,21 @@ export default function NoteEditForm({ note, onClose }) {
             />
             <input
               type="text"
-              placeholder="+ List item"
+              id={`chItem${i}`}
+              // placeholder="+ List item"
               value={x?.item}
               onChange={(e) => handleInputChange(e, i)}
-              />
+            />
             {inputList.length !== 0 && (
               <button onClick={() => handleRemoveClick(i)}>X</button>
             )}
-            {inputList.length - 1 === i && (
+            {/* {inputList.length - 1 === i && (
               <button onClick={handleAddClick}>Add</button>
-            )}
+            )} */}
           </div>
         ))}
       </div>
+      <button onClick={handleAddClick}>+ List Item</button>
       <div>
         <Color color={color} setColor={setColor} />
         <PinnedAndArchived
