@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote, updateNote } from "../../store/notes";
 import { createChecklist } from "../../store/checklist";
 import Color from "../Features/Color";
 import PinnedAndArchived from "../Features/PinnedAndArchived";
+
+// editing input list stuff
+// { item: "", checked: false }
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
@@ -12,15 +15,23 @@ export default function NoteCreateForm() {
   // --------------- useState ------------------------
   const [inCreateMode, setInCreateMode] = useState(false);
   const [title, setTitle] = useState("");
-  const [inputList, setInputList] = useState([{ item: "", checked: false }]);
+  const [inputList, setInputList] = useState([]);
   const [color, setColor] = useState(null);
   const [pinned, setPinned] = useState(false);
   const [archived, setArchived] = useState(false);
   const [errors, setErrors] = useState([]);
 
+  useEffect(() => {
+    inputList.length &&
+      inputList[inputList.length - 1].item.length === 0 &&
+      document.getElementById(`chItem${inputList.length - 1}`).focus();
+  }, [inputList.length]);
+
   // --------------- handleClicks ------------------------
   const handleAddClick = () => {
-    setInputList([...inputList, { item: "", checked: false }]);
+    const list = [...inputList];
+    list.push({ item: "", checked: false });
+    setInputList(list);
   };
 
   const handleRemoveClick = (index) => {
@@ -65,7 +76,7 @@ export default function NoteCreateForm() {
 
       setInCreateMode(false);
       setTitle("");
-      setInputList([{ item: "", checked: false }]);
+      setInputList([]);
       setColor(null);
       setPinned(false);
       setArchived(false);
@@ -79,7 +90,7 @@ export default function NoteCreateForm() {
   const onCancel = () => {
     setInCreateMode(false);
     setTitle("");
-    setInputList([{ item: "", checked: false }]);
+    setInputList([]);
     setColor(null);
     setPinned(false);
     setArchived(false);
@@ -113,19 +124,26 @@ export default function NoteCreateForm() {
                   />
                   <input
                     type="text"
-                    placeholder="+ List item"
+                    id={`chItem${i}`}
+                    // placeholder="+ List item"
                     value={x?.item}
                     onChange={(e) => handleInputChange(e, i)}
                   />
                   {inputList.length !== 0 && (
                     <button onClick={() => handleRemoveClick(i)}>X</button>
                   )}
-                  {inputList.length - 1 === i && (
+                  {/* {(inputList.length - 1 === i) && (
                     <button onClick={handleAddClick}>Add</button>
-                  )}
+                  )} */}
                 </div>
               ))}
             </div>
+            {/* <input
+              type="text"
+              placeholder="Add item"
+              onClick={handleAddClick}
+            /> */}
+            <button onClick={handleAddClick}>+ List Item</button>
             <div>
               <Color color={color} setColor={setColor} />
               <PinnedAndArchived
