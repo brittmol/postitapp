@@ -85,3 +85,19 @@ button {
     box-shadow: 0px 2px 7px gray;
 }
 
+.features {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.features > button {
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    margin-top: 15px;
+}
+
+.features > button > i {
+    font-size: 20px;
+}

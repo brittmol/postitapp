@@ -22,7 +22,7 @@ export default function Features({ note }) {
   }, [dispatch, color, pinned, archived]);
 
   return (
-    <div>
+    <div className="features">
       <Color color={color} setColor={setColor} />
       <PinnedAndArchived
         pinned={pinned}
@@ -30,7 +30,7 @@ export default function Features({ note }) {
         archived={archived}
         setArchived={setArchived}
       />
-      <button onClick={() => dispatch(removeNote(note))}>Delete Note</button>
+      <button onClick={() => dispatch(removeNote(note))}><i class="fas fa-trash-alt"></i></button>
     </div>
   );
 }

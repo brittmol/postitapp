@@ -1,7 +1,11 @@
 import React from "react";
 
-export default function PinnedAndArchived({ pinned, setPinned, archived, setArchived }) {
-
+export default function PinnedAndArchived({
+  pinned,
+  setPinned,
+  archived,
+  setArchived,
+}) {
   const clickPinned = () => {
     if (pinned === false) {
       setArchived(false);
@@ -21,17 +25,11 @@ export default function PinnedAndArchived({ pinned, setPinned, archived, setArch
   };
 
   return (
-    <div>
-      <div>
-        <button onClick={() => clickPinned()}>
-          {pinned ? "Unpin" : "Pin"}
-        </button>
-      </div>
-      <div>
-        <button onClick={() => clickArchived()}>
-          {archived ? "Unarchive" : "Archive"}
-        </button>
-      </div>
-    </div>
+    <>
+      <button onClick={() => clickPinned()}>{pinned ? <i className="fas fa-thumbtack" style={{color:"red"}}></i> : <i className="fas fa-thumbtack"></i>}</button>
+      <button onClick={() => clickArchived()}>
+        {archived ? <i class="fas fa-archive" style={{color:"red"}}></i> : <i class="fas fa-archive"></i>}
+      </button>
+    </>
   );
 }

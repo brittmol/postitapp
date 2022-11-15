@@ -136,7 +136,7 @@ export default function NoteCreateForm() {
               ))}
             </div>
             <button onClick={handleAddClick}>+ List Item</button>
-            <div>
+            <div className="features">
               <Color color={color} setColor={setColor} />
               <PinnedAndArchived
                 pinned={pinned}

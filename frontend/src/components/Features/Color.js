@@ -4,13 +4,14 @@ export default function Color({ color, setColor }) {
   const [inColorMode, setInColorMode] = useState(false);
 
   return (
-    <div>
+    <>
       <button
         onClick={() => {
           inColorMode === false ? setInColorMode(true) : setInColorMode(false);
         }}
       >
-        Color: {color}
+        <i className="fas fa-palette"></i>
+        {/* <FontAwesomeIcon icon="fa-regular fa-palette" /> */}
       </button>
       {inColorMode && (
         <div>
@@ -19,6 +20,6 @@ export default function Color({ color, setColor }) {
           <button onClick={() => setColor("yellow")}>Yellow</button>
         </div>
       )}
-    </div>
+    </>
   );
 }

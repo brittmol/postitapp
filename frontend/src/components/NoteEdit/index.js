@@ -158,7 +158,7 @@ export default function NoteEditForm({ note, onClose }) {
             )
         )}
       </div>
-      <div>
+      <div className="features">
         <Color color={color} setColor={setColor} />
         <PinnedAndArchived
           pinned={pinned}
@@ -166,7 +166,7 @@ export default function NoteEditForm({ note, onClose }) {
           archived={archived}
           setArchived={setArchived}
         />
-        <button onClick={() => dispatch(removeNote(note))}>Delete Note</button>
+        <button onClick={() => dispatch(removeNote(note))}><i class="fas fa-trash-alt"></i></button>
       </div>
     </div>
   );
