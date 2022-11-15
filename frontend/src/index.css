@@ -2,17 +2,44 @@
 
 body {
     font-family: 'Roboto', arial, sans-serif;
-    /* font-family: 'Open Sans', sans-serif; */
+    color: #202124;
+    font-size: 14px;
+    /* word-wrap: break-word; */
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: #202124;
 }
 
-button, .note h3 {
+input {
+    border: none;
+    background-color: transparent;
+}
+
+button, .note .title {
     cursor: pointer;
 }
+
+/* All feature buttons  */
+
+/* Single Note */
+
+.title {
+    /* font-family: 'Noto Sans Mende Kikakui', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 48
+  }
+
 
 .Nav {
     /* background-color: yellow; */
@@ -61,16 +88,16 @@ button, .note h3 {
 .note {
     border-radius: 10px;
     margin: 10px;
-    padding: 10px;
+    padding: 15px;
     width: 250px;
     height: min-content;
     /* min-height: 200px; */
-    transition: 0.5s;
+    transition: 0.2s;
 }
 
 .note:hover {
     box-shadow: 0px 2px 7px gray;
-    transition: 0.5s;
+    transition: 0.2s;
 }
 
 #note-modal {
@@ -98,30 +125,41 @@ button, .note h3 {
     box-shadow: 0px 2px 7px gray;
 }
 
-.features {
+
+.features, .title-pin-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.features > button {
-    margin-top: 15px;
-    border: none;
-    border-radius: 10px;
-    background-color: transparent;
+.title-pin-container {
+    padding-bottom: 20px;
 }
 
-i {
+.features {
+    padding-top: 30px;
+}
+
+.note i, .note .material-symbols-outlined {
     font-size: 20px;
+    padding: 8px;
+    border-radius: 20px;
+    /* color: black; */
 }
 
 .note button {
     color: transparent;
-    transition: 0.5s;
+    background-color: transparent;
+    transition: 0.7s;
+    border: none;
 }
 
 .note:hover button {
-    /* display: block; */
-    color: black;
-    transition: 0.5s;
+    color: #202124;
+    transition: 0.7s;
+}
+
+.note .material-symbols-outlined:hover, .note i:hover {
+    background-color: #c3c7d0b2;
+    transition: 0s;
 }

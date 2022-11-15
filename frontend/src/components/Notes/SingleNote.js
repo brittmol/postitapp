@@ -41,19 +41,24 @@ export default function SingleNote({ note }) {
       <div
         className="note"
         style={{ backgroundColor: note?.color, border: borderSetting }}
-        // onClick={() => setShowModal(true)}
       >
-        {/* <button className="editNote" onClick={() => setShowModal(true)}>Edit</button> */}
-        <h3 onClick={() => setShowModal(true)}>{note?.title ? note?.title : "***Empty Note***"}</h3>
-        <ChecklistItems note={note} />
-        <div className="features">
-          <Color color={color} setColor={setColor} />
+        <div className="title-pin-container">
+          <div className="title" onClick={() => setShowModal(true)}>
+            {note?.title ? note?.title : "***Empty Note***"}
+          </div>
           <Pinned
             pinned={pinned}
             setPinned={setPinned}
             archived={archived}
             setArchived={setArchived}
           />
+        </div>
+        <ChecklistItems note={note} />
+        <div className="features">
+          <button onClick={() => setShowModal(true)}>
+            <span class="material-symbols-outlined">edit</span>
+          </button>
+          <Color color={color} setColor={setColor} />
           <Archived
             pinned={pinned}
             setPinned={setPinned}
@@ -61,8 +66,8 @@ export default function SingleNote({ note }) {
             setArchived={setArchived}
           />
           <button onClick={() => dispatch(removeNote(note))}>
-            {/* <i class="fas fa-trash-alt"></i> */}
-            <span class="material-symbols-outlined">delete</span>
+            {/* <i className="fas fa-trash-alt"></i> */}
+            <span className="material-symbols-outlined">delete</span>
           </button>
         </div>
       </div>

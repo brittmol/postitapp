@@ -90,16 +90,18 @@ export default function NoteEditForm({ note, onClose }) {
 
   return (
     <div id="note-modal" style={{ backgroundColor: color }}>
-      <div>
-        <button onClick={() => onSave()}>Save</button>
-        <button onClick={() => onClose()}>Cancel</button>
-      </div>
-      <div>
+      <div className="title-pin-container">
         <input
           type="text"
           placeholder={title}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+        />
+        <Pinned
+          pinned={pinned}
+          setPinned={setPinned}
+          archived={archived}
+          setArchived={setArchived}
         />
       </div>
       <div>
@@ -123,9 +125,6 @@ export default function NoteEditForm({ note, onClose }) {
                 {inputList.length !== 0 && (
                   <button onClick={() => handleRemoveClick(i)}>X</button>
                 )}
-                {/* {inputList.length - 1 === i && (
-              <button onClick={handleAddClick}>Add</button>
-            )} */}
               </div>
             )
         )}
@@ -152,21 +151,12 @@ export default function NoteEditForm({ note, onClose }) {
                 {inputList.length !== 0 && (
                   <button onClick={() => handleRemoveClick(i)}>X</button>
                 )}
-                {/* {inputList.length - 1 === i && (
-              <button onClick={handleAddClick}>Add</button>
-            )} */}
               </div>
             )
         )}
       </div>
       <div className="features">
         <Color color={color} setColor={setColor} />
-        <Pinned
-          pinned={pinned}
-          setPinned={setPinned}
-          archived={archived}
-          setArchived={setArchived}
-        />
         <Archived
           pinned={pinned}
           setPinned={setPinned}
@@ -174,9 +164,10 @@ export default function NoteEditForm({ note, onClose }) {
           setArchived={setArchived}
         />
         <button onClick={() => dispatch(removeNote(note))}>
-          {/* <i class="fas fa-trash-alt"></i> */}
-          <span class="material-symbols-outlined">delete</span>
+          <span className="material-symbols-outlined">delete</span>
         </button>
+        <button onClick={() => onClose()}>Cancel</button>
+        <button onClick={() => onSave()}>Save</button>
       </div>
     </div>
   );

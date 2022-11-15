@@ -100,15 +100,19 @@ export default function NoteCreateForm() {
     <div className="createNote">
       {inCreateMode ? (
         <div style={{ backgroundColor: color || null, padding: "10px" }}>
-          <div>
+          <div className="title-pin-container">
             <input
               type="text"
               placeholder="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <button onClick={() => onSave()}>Create</button>
-            <button onClick={() => onCancel()}>Cancel</button>
+            <Pinned
+              pinned={pinned}
+              setPinned={setPinned}
+              archived={archived}
+              setArchived={setArchived}
+            />
           </div>
           <div>
             <div>
@@ -130,27 +134,20 @@ export default function NoteCreateForm() {
                   {inputList.length !== 0 && (
                     <button onClick={() => handleRemoveClick(i)}>X</button>
                   )}
-                  {/* {(inputList.length - 1 === i) && (
-                    <button onClick={handleAddClick}>Add</button>
-                  )} */}
                 </div>
               ))}
             </div>
             <button onClick={handleAddClick}>+ List Item</button>
             <div className="features">
               <Color color={color} setColor={setColor} />
-              <Pinned
-                pinned={pinned}
-                setPinned={setPinned}
-                archived={archived}
-                setArchived={setArchived}
-              />
               <Archived
                 pinned={pinned}
                 setPinned={setPinned}
                 archived={archived}
                 setArchived={setArchived}
               />
+              <button onClick={() => onCancel()}>Cancel</button>
+              <button onClick={() => onSave()}>Create</button>
             </div>
           </div>
         </div>

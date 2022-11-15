@@ -14,20 +14,10 @@ export default function Pinned({ pinned, setPinned, archived, setArchived }) {
     <>
       <button onClick={() => clickPinned()}>
         {pinned ? (
-          <i className="fas fa-thumbtack"></i>
+          <span className="material-symbols-outlined" style={{ "font-variation-settings":"'FILL' 1,'wght' 700,'GRAD' 0,'opsz' 48"}}>push_pin</span>
         ) : (
-          <span className="material-symbols-outlined">push_pin</span>
+          <span className="material-symbols-outlined" style={{ "font-variation-settings":"'FILL' 0,'wght' 700,'GRAD' 0,'opsz' 48"}}>push_pin</span>
         )}
-        {/* {pinned ? (
-          <i className="fas fa-thumbtack" style={{ color: "red" }}></i>
-        ) : (
-          <i className="fas fa-thumbtack"></i>
-        )} */}
-        {/* {pinned ? (
-          <span className="material-symbols-outlined">push_pin</span>
-        ) : (
-          <span className="material-symbols-outlined">push_pin</span>
-        )} */}
       </button>
     </>
   );
