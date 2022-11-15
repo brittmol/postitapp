@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createNote, updateNote } from "../../store/notes";
 import { createChecklist } from "../../store/checklist";
 import Color from "../Features/Color";
-import PinnedAndArchived from "../Features/PinnedAndArchived";
+import Pinned from "../Features/Pinned";
+import Archived from "../Features/Archived";
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
@@ -138,7 +139,13 @@ export default function NoteCreateForm() {
             <button onClick={handleAddClick}>+ List Item</button>
             <div className="features">
               <Color color={color} setColor={setColor} />
-              <PinnedAndArchived
+              <Pinned
+                pinned={pinned}
+                setPinned={setPinned}
+                archived={archived}
+                setArchived={setArchived}
+              />
+              <Archived
                 pinned={pinned}
                 setPinned={setPinned}
                 archived={archived}

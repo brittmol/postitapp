@@ -10,8 +10,8 @@ export default function Color({ color, setColor }) {
           inColorMode === false ? setInColorMode(true) : setInColorMode(false);
         }}
       >
-        <i className="fas fa-palette"></i>
-        {/* <FontAwesomeIcon icon="fa-regular fa-palette" /> */}
+        {/* <i className="fas fa-palette"></i> */}
+        <span className="material-symbols-outlined">palette</span>
       </button>
       {inColorMode && (
         <div>

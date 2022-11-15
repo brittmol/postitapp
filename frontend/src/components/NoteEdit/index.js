@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { updateNote, removeNote } from "../../store/notes";
 import { createChecklist, removeChecklist } from "../../store/checklist";
 import Color from "../Features/Color";
-import PinnedAndArchived from "../Features/PinnedAndArchived";
+import Pinned from "../Features/Pinned";
+import Archived from "../Features/Archived";
 
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
@@ -160,13 +161,22 @@ export default function NoteEditForm({ note, onClose }) {
       </div>
       <div className="features">
         <Color color={color} setColor={setColor} />
-        <PinnedAndArchived
+        <Pinned
           pinned={pinned}
           setPinned={setPinned}
           archived={archived}
           setArchived={setArchived}
         />
-        <button onClick={() => dispatch(removeNote(note))}><i class="fas fa-trash-alt"></i></button>
+        <Archived
+          pinned={pinned}
+          setPinned={setPinned}
+          archived={archived}
+          setArchived={setArchived}
+        />
+        <button onClick={() => dispatch(removeNote(note))}>
+          {/* <i class="fas fa-trash-alt"></i> */}
+          <span class="material-symbols-outlined">delete</span>
+        </button>
       </div>
     </div>
   );

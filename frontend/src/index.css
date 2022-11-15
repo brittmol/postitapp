@@ -1,5 +1,10 @@
 /* TODO Add site wide styles */
 
+body {
+    font-family: 'Roboto', arial, sans-serif;
+    /* font-family: 'Open Sans', sans-serif; */
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -100,6 +105,10 @@ button {
     margin-top: 15px;
 }
 
-.features > button > i {
+/* .features > button > i {
+    font-size: 20px;
+} */
+
+i {
     font-size: 20px;
 }
