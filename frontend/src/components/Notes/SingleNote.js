@@ -43,8 +43,8 @@ export default function SingleNote({ note }) {
         style={{ backgroundColor: note?.color, border: borderSetting }}
         // onClick={() => setShowModal(true)}
       >
-        <button onClick={() => setShowModal(true)}>Edit</button>
-        <h3>{note?.title ? note?.title : "***Empty Note***"}</h3>
+        {/* <button className="editNote" onClick={() => setShowModal(true)}>Edit</button> */}
+        <h3 onClick={() => setShowModal(true)}>{note?.title ? note?.title : "***Empty Note***"}</h3>
         <ChecklistItems note={note} />
         <div className="features">
           <Color color={color} setColor={setColor} />

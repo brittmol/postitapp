@@ -10,6 +10,10 @@ a {
     color: black;
 }
 
+button, .note h3 {
+    cursor: pointer;
+}
+
 .Nav {
     /* background-color: yellow; */
     /* background-color: #e0e0e0; */
@@ -61,10 +65,12 @@ a {
     width: 250px;
     height: min-content;
     /* min-height: 200px; */
+    transition: 0.5s;
 }
 
-button {
-    cursor: pointer;
+.note:hover {
+    box-shadow: 0px 2px 7px gray;
+    transition: 0.5s;
 }
 
 #note-modal {
@@ -99,16 +105,23 @@ button {
 }
 
 .features > button {
+    margin-top: 15px;
     border: none;
     border-radius: 10px;
     background-color: transparent;
-    margin-top: 15px;
 }
-
-/* .features > button > i {
-    font-size: 20px;
-} */
 
 i {
     font-size: 20px;
+}
+
+.note button {
+    color: transparent;
+    transition: 0.5s;
+}
+
+.note:hover button {
+    /* display: block; */
+    color: black;
+    transition: 0.5s;
 }
