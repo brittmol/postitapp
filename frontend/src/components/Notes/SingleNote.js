@@ -11,11 +11,14 @@ export default function SingleNote({ note }) {
     setShowModal(false);
   };
 
+  let borderSetting
+  note?.color === null ? borderSetting = "1px solid #e0e0e0" : borderSetting = `1px solid ${note?.color}`
+
   return (
     <>
       <div
         className="note"
-        style={{ backgroundColor: note?.color }}
+        style={{ backgroundColor: note?.color, border: borderSetting}}
         // onClick={() => setShowModal(true)}
       >
         <button onClick={() => setShowModal(true)}>Edit</button>

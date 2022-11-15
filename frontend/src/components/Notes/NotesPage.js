@@ -23,7 +23,6 @@ export default function NotesPage() {
 
   return (
     <div className="NotesPage">
-      <h1>Notes!</h1>
       <NoteCreateForm />
       {/* <NotesList notesArray={notesArray} /> */}
       <div>

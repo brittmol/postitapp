@@ -27,13 +27,13 @@ export default function App() {
           </Route>
           <ProtectedRoute exact path="/notes">
             <div className="WholePage">
-              <SideBar />
+              <SideBar page={"notes"} />
               <NotesPage />
             </div>
           </ProtectedRoute>
           <ProtectedRoute exact path="/archive">
             <div className="WholePage">
-              <SideBar />
+              <SideBar page={"archive"} />
               <ArchivePage />
             </div>
           </ProtectedRoute>

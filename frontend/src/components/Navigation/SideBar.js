@@ -1,11 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function SideBar() {
+export default function SideBar({ page }) {
   return (
     <div className="SideBar">
-      <NavLink to="/notes">Notes</NavLink>
-      <NavLink to="/archive">Archive</NavLink>
+      <NavLink to="/notes" id={page === "notes" ? "page" : ""}>
+        Notes
+      </NavLink>
+      <NavLink to="/archive" id={page === "archive" ? "page" : ""}>
+        Archive
+      </NavLink>
     </div>
   );
 }

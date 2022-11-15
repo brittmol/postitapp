@@ -96,9 +96,9 @@ export default function NoteCreateForm() {
   // --------------- return ------------------------
 
   return (
-    <>
+    <div className="createNote">
       {inCreateMode ? (
-        <div style={{ backgroundColor: color || "orange", padding: "10px" }}>
+        <div style={{ backgroundColor: color || null, padding: "10px" }}>
           <div>
             <input
               type="text"
@@ -148,13 +148,13 @@ export default function NoteCreateForm() {
           </div>
         </div>
       ) : (
-        <div style={{ backgroundColor: "orange", padding: "10px" }}>
+        <div style={{ padding: "10px" }}>
           <input
             placeholder="Take a note..."
             onFocus={() => setInCreateMode(true)}
           />
         </div>
       )}
-    </>
+    </div>
   );
 }
