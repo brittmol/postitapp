@@ -11,6 +11,8 @@ a {
     border: 1px solid #e0e0e0;
     height: 30px;
     padding: 10px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .WholePage {
