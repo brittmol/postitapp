@@ -18,6 +18,7 @@ export default function NoteEditForm({ note, onClose }) {
       noteId: currentNoteId,
     };
   });
+  newList.sort((a, b) => a.id - b.id);
 
   // --------------- useState ------------------------
   const [title, setTitle] = useState(note?.title || "");
@@ -101,31 +102,62 @@ export default function NoteEditForm({ note, onClose }) {
         />
       </div>
       <div>
-        {inputList.map((x, i) => (
-          <div key={i}>
-            <input
-              type="checkbox"
-              id={i}
-              checked={x?.checked}
-              onChange={(e) => handleCheckedClick(e, i)}
-            />
-            <input
-              type="text"
-              id={`chItem${i}`}
-              // placeholder="+ List item"
-              value={x?.item}
-              onChange={(e) => handleInputChange(e, i)}
-            />
-            {inputList.length !== 0 && (
-              <button onClick={() => handleRemoveClick(i)}>X</button>
-            )}
-            {/* {inputList.length - 1 === i && (
+        {inputList.map(
+          (x, i) =>
+            x?.checked === false && (
+              <div key={i}>
+                <input
+                  type="checkbox"
+                  id={i}
+                  checked={x?.checked}
+                  onChange={(e) => handleCheckedClick(e, i)}
+                />
+                <input
+                  type="text"
+                  id={`chItem${i}`}
+                  // placeholder="+ List item"
+                  value={x?.item}
+                  onChange={(e) => handleInputChange(e, i)}
+                />
+                {inputList.length !== 0 && (
+                  <button onClick={() => handleRemoveClick(i)}>X</button>
+                )}
+                {/* {inputList.length - 1 === i && (
               <button onClick={handleAddClick}>Add</button>
             )} */}
-          </div>
-        ))}
+              </div>
+            )
+        )}
       </div>
       <button onClick={handleAddClick}>+ List Item</button>
+      <div>
+        {inputList.map(
+          (x, i) =>
+            x?.checked === true && (
+              <div key={i}>
+                <input
+                  type="checkbox"
+                  id={i}
+                  checked={x?.checked}
+                  onChange={(e) => handleCheckedClick(e, i)}
+                />
+                <input
+                  type="text"
+                  id={`chItem${i}`}
+                  // placeholder="+ List item"
+                  value={x?.item}
+                  onChange={(e) => handleInputChange(e, i)}
+                />
+                {inputList.length !== 0 && (
+                  <button onClick={() => handleRemoveClick(i)}>X</button>
+                )}
+                {/* {inputList.length - 1 === i && (
+              <button onClick={handleAddClick}>Add</button>
+            )} */}
+              </div>
+            )
+        )}
+      </div>
       <div>
         <Color color={color} setColor={setColor} />
         <PinnedAndArchived
