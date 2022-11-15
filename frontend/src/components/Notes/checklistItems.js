@@ -23,7 +23,7 @@ export default function ChecklistItems({ note }) {
             type="checkbox"
             id={ch?.id}
             checked={ch?.checked}
-            onClick={(e) => handleCheckedClick(e, ch, i)}
+            onChange={(e) => handleCheckedClick(e, ch, i)}
           />
           <label htmlFor={ch?.id}>{ch?.item}</label>
         </div>

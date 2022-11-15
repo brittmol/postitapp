@@ -107,7 +107,7 @@ export default function NoteEditForm({ note, onClose }) {
               type="checkbox"
               id={i}
               checked={x?.checked}
-              onClick={(e) => handleCheckedClick(e, i)}
+              onChange={(e) => handleCheckedClick(e, i)}
             />
             <input
               type="text"
