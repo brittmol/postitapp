@@ -6,7 +6,7 @@ import Color from "../Features/Color";
 import Pinned from "../Features/Pinned";
 import Archived from "../Features/Archived";
 import ChangeChecklist from "../Checklists/ChangeChecklist";
-import useOutsideClick from "./useOutsideClick";
+// import useOutsideClick from "./useOutsideClick";
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
@@ -52,9 +52,10 @@ export default function NoteCreateForm() {
     }
   };
 
-  // --------------- onClear ------------------------
+  // --------------- onCancel ------------------------
 
-  const onClear = () => {
+  const onCancel = () => {
+    setInCreateMode(false)
     setTitle("");
     setInputList([]);
     setColor(null);
@@ -63,13 +64,13 @@ export default function NoteCreateForm() {
   };
 
   // --------------- off click ------------------------
-  const ref = useRef();
-  useOutsideClick(ref, () => {
-    if (inCreateMode) {
-      onClear();
-      setInCreateMode(false);
-    }
-  });
+  // const ref = useRef();
+  // useOutsideClick(ref, () => {
+  //   if (inCreateMode) {
+  //     onCancel();
+  //     setInCreateMode(false);
+  //   }
+  // });
 
   // --------------- return ------------------------
 
@@ -117,7 +118,7 @@ export default function NoteCreateForm() {
               archived={archived}
               setArchived={setArchived}
             />
-            <button onClick={() => onClear()}>Clear</button>
+            <button onClick={() => onCancel()}>Cancel</button>
             <button onClick={() => onSave()}>Create</button>
           </div>
         </div>
