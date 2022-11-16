@@ -89,7 +89,7 @@ export default function NoteCreateForm() {
         </div>
       ) : (
         <div
-          ref={ref}
+          // ref={ref}
           className="createNote"
           style={{ backgroundColor: color || null, padding: "10px" }}
         >
