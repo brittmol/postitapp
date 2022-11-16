@@ -21,25 +21,8 @@ button, .note .title {
     cursor: pointer;
 }
 
-/* All feature buttons  */
 
-/* Single Note */
-
-.title {
-    /* font-family: 'Noto Sans Mende Kikakui', sans-serif; */
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.material-symbols-outlined {
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 600,
-    'GRAD' 0,
-    'opsz' 48
-  }
-
+/* NotesPage & ArchivePage */
 
 .Nav {
     /* background-color: yellow; */
@@ -59,6 +42,9 @@ button, .note .title {
 
 .NotesPage {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .SideBar {
@@ -85,46 +71,17 @@ button, .note .title {
     flex-wrap: wrap;
 }
 
-.note {
-    border-radius: 10px;
-    margin: 10px;
-    padding: 15px;
-    width: 250px;
-    height: min-content;
-    /* min-height: 200px; */
-    transition: 0.2s;
-}
 
-.note:hover {
-    box-shadow: 0px 2px 7px gray;
-    transition: 0.2s;
-}
 
-#note-modal {
-    border-radius: 10px;
-    padding: 10px;
-    width: 500px;
-}
+/* All feature buttons  */
 
-#note-modal > input {
-    background-color: transparent;
-    border: 0;
-    padding: 8px;
-}
-
-#note-modal > input:hover {
-    /* background-color: #d3d3d3; */
-    cursor: pointer;
-}
-
-.createNote {
-    border: 1px solid #e0e0e0;
-    border-radius: 20px;
-    width: fit-content;
-    /* box-sizing: border-box; */
-    box-shadow: 0px 2px 7px gray;
-}
-
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 48
+  }
 
 .features, .title-pin-container {
     display: flex;
@@ -132,34 +89,60 @@ button, .note .title {
     justify-content: space-between;
 }
 
-.title-pin-container {
-    padding-bottom: 20px;
-}
-
 .features {
-    padding-top: 30px;
+    padding-top: 15px;
 }
 
-.note i, .note .material-symbols-outlined {
+.ft-btn {
+    border: none;
+    background-color: transparent;
+}
+
+.ft-btn .material-symbols-outlined {
     font-size: 20px;
     padding: 8px;
     border-radius: 20px;
-    /* color: black; */
+    transition: 0.1s;
 }
 
+.ft-btn .material-symbols-outlined:hover {
+    background-color: #c3c7d0b2;
+    transition: 0.1s;
+    color: black;
+}
+
+/* SingleNote feature buttons */
 .note button {
     color: transparent;
     background-color: transparent;
     transition: 0.7s;
-    border: none;
 }
 
 .note:hover button {
-    color: #202124;
+    color: #494c52;
     transition: 0.7s;
 }
 
-.note .material-symbols-outlined:hover, .note i:hover {
-    background-color: #c3c7d0b2;
-    transition: 0s;
+
+/* Other */
+
+.title {
+    /* font-family: 'Noto Sans Mende Kikakui', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.createNote {
+    position: relative;
+    width: 600px;
+    /* width: fit-content; */
+    /* margin: 32px auto 50px auto; */
+    padding: 7px;
+    border-radius: 7px;
+    box-shadow: 0 1px 7px rgb(128, 128, 128);
+    /* border: 1px solid #e0e0e0; */
+    /* border-radius: 20px; */
+    /* box-sizing: border-box; */
+    /* box-shadow: 0px 2px 7px gray; */
 }

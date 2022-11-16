@@ -12,8 +12,7 @@ export default function Archived({ pinned, setPinned, archived, setArchived }) {
 
   return (
     <>
-      <button onClick={() => clickArchived()}>
-        {/* {archived ? <i class="fas fa-archive" style={{color:"red"}}></i> : <i class="fas fa-archive"></i>} */}
+      <button className="ft-btn" onClick={() => clickArchived()}>
         {archived ? (
           <span className="material-symbols-outlined">unarchive</span>
         ) : (

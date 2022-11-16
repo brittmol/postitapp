@@ -92,6 +92,7 @@ export default function NoteEditForm({ note, onClose }) {
     <div id="note-modal" style={{ backgroundColor: color }}>
       <div className="title-pin-container">
         <input
+          className="title"
           type="text"
           placeholder={title}
           value={title}
@@ -163,7 +164,7 @@ export default function NoteEditForm({ note, onClose }) {
           archived={archived}
           setArchived={setArchived}
         />
-        <button onClick={() => dispatch(removeNote(note))}>
+        <button className="ft-btn" onClick={() => dispatch(removeNote(note))}>
           <span className="material-symbols-outlined">delete</span>
         </button>
         <button onClick={() => onClose()}>Cancel</button>

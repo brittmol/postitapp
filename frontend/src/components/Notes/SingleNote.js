@@ -7,6 +7,7 @@ import ChecklistItems from "./checklistItems";
 import Color from "../Features/Color";
 import Pinned from "../Features/Pinned";
 import Archived from "../Features/Archived";
+import "./SingleNote.css"
 
 export default function SingleNote({ note }) {
   const dispatch = useDispatch();
@@ -55,7 +56,7 @@ export default function SingleNote({ note }) {
         </div>
         <ChecklistItems note={note} />
         <div className="features">
-          <button onClick={() => setShowModal(true)}>
+          <button className="ft-btn" onClick={() => setShowModal(true)}>
             <span class="material-symbols-outlined">edit</span>
           </button>
           <Color color={color} setColor={setColor} />
@@ -65,8 +66,7 @@ export default function SingleNote({ note }) {
             archived={archived}
             setArchived={setArchived}
           />
-          <button onClick={() => dispatch(removeNote(note))}>
-            {/* <i className="fas fa-trash-alt"></i> */}
+          <button className="ft-btn" onClick={() => dispatch(removeNote(note))}>
             <span className="material-symbols-outlined">delete</span>
           </button>
         </div>

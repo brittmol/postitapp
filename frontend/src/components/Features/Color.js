@@ -5,12 +5,11 @@ export default function Color({ color, setColor }) {
 
   return (
     <>
-      <button
+      <button className="ft-btn"
         onClick={() => {
           inColorMode === false ? setInColorMode(true) : setInColorMode(false);
         }}
       >
-        {/* <i className="fas fa-palette"></i> */}
         <span className="material-symbols-outlined">palette</span>
       </button>
       {inColorMode && (

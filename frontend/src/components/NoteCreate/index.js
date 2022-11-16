@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createNote, updateNote } from "../../store/notes";
 import { createChecklist } from "../../store/checklist";
 import Color from "../Features/Color";
 import Pinned from "../Features/Pinned";
 import Archived from "../Features/Archived";
+import useOutsideClick from "./useOutsideClick";
 
 export default function NoteCreateForm() {
   const dispatch = useDispatch();
@@ -83,10 +84,9 @@ export default function NoteCreateForm() {
     }
   };
 
-  // --------------- onCancel ------------------------
+  // --------------- onClear ------------------------
 
-  const onCancel = () => {
-    setInCreateMode(false);
+  const onClear = () => {
     setTitle("");
     setInputList([]);
     setColor(null);
@@ -94,14 +94,28 @@ export default function NoteCreateForm() {
     setArchived(false);
   };
 
+  // --------------- off click ------------------------
+  const ref = useRef();
+  useOutsideClick(ref, () => {
+    if (inCreateMode) {
+      onClear()
+      setInCreateMode(false)
+
+    };
+  });
+
   // --------------- return ------------------------
 
   return (
     <div className="createNote">
       {inCreateMode ? (
-        <div style={{ backgroundColor: color || null, padding: "10px" }}>
+        <div
+          ref={ref}
+          style={{ backgroundColor: color || null, padding: "10px" }}
+        >
           <div className="title-pin-container">
             <input
+              className="title"
               type="text"
               placeholder="Title"
               value={title}
@@ -146,14 +160,16 @@ export default function NoteCreateForm() {
                 archived={archived}
                 setArchived={setArchived}
               />
-              <button onClick={() => onCancel()}>Cancel</button>
+              <button onClick={() => onClear()}>Clear</button>
               <button onClick={() => onSave()}>Create</button>
             </div>
           </div>
         </div>
       ) : (
-        <div style={{ padding: "10px" }}>
+        <div onClick={() => setInCreateMode(true)} style={{ padding: "10px" }}>
           <input
+            style={{ backgroundColor: "yellow" }}
+            className="title"
             placeholder="Take a note..."
             onFocus={() => setInCreateMode(true)}
           />
