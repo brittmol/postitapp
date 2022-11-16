@@ -74,12 +74,25 @@ export default function NoteCreateForm() {
   // --------------- return ------------------------
 
   return (
-    <div
-      className="createNote"
-      style={{ backgroundColor: color || null, padding: "10px" }}
-    >
-      {inCreateMode ? (
-        <div ref={ref}>
+    <>
+      {!inCreateMode ? (
+        <div
+          className="createNote"
+          onClick={() => setInCreateMode(true)}
+          style={{ padding: "10px" }}
+        >
+          <input
+            className="title"
+            placeholder="Take a note..."
+            onFocus={() => setInCreateMode(true)}
+          />
+        </div>
+      ) : (
+        <div
+          ref={ref}
+          className="createNote"
+          style={{ backgroundColor: color || null, padding: "10px" }}
+        >
           <div className="title-pin-container">
             <input
               className="title"
@@ -108,15 +121,7 @@ export default function NoteCreateForm() {
             <button onClick={() => onSave()}>Create</button>
           </div>
         </div>
-      ) : (
-        <div onClick={() => setInCreateMode(true)} style={{ padding: "10px" }}>
-          <input
-            className="title"
-            placeholder="Take a note..."
-            onFocus={() => setInCreateMode(true)}
-          />
-        </div>
       )}
-    </div>
+    </>
   );
 }

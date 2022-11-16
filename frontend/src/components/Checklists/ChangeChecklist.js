@@ -17,7 +17,6 @@ export default function ChangeChecklist({currentNoteId, inputList, setInputList}
 
   return (
     <>
-      <h3>*******Change Checklist********</h3>
       <InputListMap inputList={inputList} setInputList={setInputList} isChecked={false} />
       <button onClick={handleAddClick}>+ List Item</button>
       <InputListMap inputList={inputList} setInputList={setInputList} isChecked={true} />
