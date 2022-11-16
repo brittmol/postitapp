@@ -57,7 +57,7 @@ export default function SingleNote({ note }) {
         <ChecklistItems note={note} />
         <div className="features">
           <button className="ft-btn" onClick={() => setShowModal(true)}>
-            <span class="material-symbols-outlined">edit</span>
+            <span className="material-symbols-outlined">edit</span>
           </button>
           <Color color={color} setColor={setColor} />
           <Archived

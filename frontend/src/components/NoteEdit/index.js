@@ -5,6 +5,7 @@ import { createChecklist, removeChecklist } from "../../store/checklist";
 import Color from "../Features/Color";
 import Pinned from "../Features/Pinned";
 import Archived from "../Features/Archived";
+import ChangeChecklist from "../Checklists/ChangeChecklist";
 
 export default function NoteEditForm({ note, onClose }) {
   const dispatch = useDispatch();
@@ -28,39 +29,6 @@ export default function NoteEditForm({ note, onClose }) {
   const [pinned, setPinned] = useState(note?.pinned || false);
   const [archived, setArchived] = useState(note?.archived || false);
   const [errors, setErrors] = useState([]);
-
-  useEffect(() => {
-    inputList.length &&
-      inputList[inputList.length - 1].item.length === 0 &&
-      document.getElementById(`chItem${inputList.length - 1}`).focus();
-  }, [inputList.length]);
-
-  // --------------- handleClicks ------------------------
-  const handleAddClick = () => {
-    const list = [...inputList];
-    list.push({ item: "", checked: false, noteId: currentNoteId });
-    setInputList(list);
-  };
-
-  const handleRemoveClick = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-  };
-
-  const handleInputChange = (e, index) => {
-    const { value } = e.target;
-    const list = [...inputList];
-    list[index]["item"] = value;
-    setInputList(list);
-  };
-
-  const handleCheckedClick = (e, index) => {
-    const { checked } = e.target;
-    const list = [...inputList];
-    list[index]["checked"] = checked;
-    setInputList(list);
-  };
 
   // --------------- onSave ------------------------
   const onSave = () => {
@@ -105,57 +73,7 @@ export default function NoteEditForm({ note, onClose }) {
           setArchived={setArchived}
         />
       </div>
-      <div>
-        {inputList.map(
-          (x, i) =>
-            x?.checked === false && (
-              <div key={i}>
-                <input
-                  type="checkbox"
-                  id={i}
-                  checked={x?.checked}
-                  onChange={(e) => handleCheckedClick(e, i)}
-                />
-                <input
-                  type="text"
-                  id={`chItem${i}`}
-                  // placeholder="+ List item"
-                  value={x?.item}
-                  onChange={(e) => handleInputChange(e, i)}
-                />
-                {inputList.length !== 0 && (
-                  <button onClick={() => handleRemoveClick(i)}>X</button>
-                )}
-              </div>
-            )
-        )}
-      </div>
-      <button onClick={handleAddClick}>+ List Item</button>
-      <div>
-        {inputList.map(
-          (x, i) =>
-            x?.checked === true && (
-              <div key={i}>
-                <input
-                  type="checkbox"
-                  id={i}
-                  checked={x?.checked}
-                  onChange={(e) => handleCheckedClick(e, i)}
-                />
-                <input
-                  type="text"
-                  id={`chItem${i}`}
-                  // placeholder="+ List item"
-                  value={x?.item}
-                  onChange={(e) => handleInputChange(e, i)}
-                />
-                {inputList.length !== 0 && (
-                  <button onClick={() => handleRemoveClick(i)}>X</button>
-                )}
-              </div>
-            )
-        )}
-      </div>
+      <ChangeChecklist currentNoteId={currentNoteId} inputList={inputList} setInputList={setInputList} />
       <div className="features">
         <Color color={color} setColor={setColor} />
         <Archived
