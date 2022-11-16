@@ -98,21 +98,20 @@ export default function NoteCreateForm() {
   const ref = useRef();
   useOutsideClick(ref, () => {
     if (inCreateMode) {
-      onClear()
-      setInCreateMode(false)
-
-    };
+      onClear();
+      setInCreateMode(false);
+    }
   });
 
   // --------------- return ------------------------
 
   return (
-    <div className="createNote">
+    <div
+      className="createNote"
+      style={{ backgroundColor: color || null, padding: "10px" }}
+    >
       {inCreateMode ? (
-        <div
-          ref={ref}
-          style={{ backgroundColor: color || null, padding: "10px" }}
-        >
+        <div ref={ref}>
           <div className="title-pin-container">
             <input
               className="title"
@@ -168,7 +167,6 @@ export default function NoteCreateForm() {
       ) : (
         <div onClick={() => setInCreateMode(true)} style={{ padding: "10px" }}>
           <input
-            style={{ backgroundColor: "yellow" }}
             className="title"
             placeholder="Take a note..."
             onFocus={() => setInCreateMode(true)}

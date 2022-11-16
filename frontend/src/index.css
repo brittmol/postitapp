@@ -41,7 +41,7 @@ button, .note .title {
 }
 
 .NotesPage {
-    padding: 20px;
+    padding: 0 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,7 +50,6 @@ button, .note .title {
 .SideBar {
     min-width: 250px;
     padding: 10px 0;
-    /* background-color: #e0e0e0; */
     display: flex;
     flex-direction: column;
 }
@@ -62,6 +61,11 @@ button, .note .title {
 
 #page {
     background-color: #FEEFC3;
+    border-radius: 0 25px 25px 0;
+}
+
+#notPage:hover {
+    background-color: #f1f3f4;
     border-radius: 0 25px 25px 0;
 }
 
@@ -136,6 +140,7 @@ button, .note .title {
 .createNote {
     position: relative;
     width: 600px;
+    margin: 32px auto 16px auto;
     /* width: fit-content; */
     /* margin: 32px auto 50px auto; */
     padding: 7px;
